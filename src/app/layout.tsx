@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Noto_Sans_Devanagari, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
@@ -11,11 +11,12 @@ import { brand } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
+const devanagari = Noto_Sans_Devanagari({ subsets: ["devanagari"], weight: ["500", "700"], variable: "--font-devanagari" });
 
 export const metadata: Metadata = {
-  title: { default: `${brand.name} | Digital Marketing & IT Services`, template: `%s | ${brand.name}` },
+  title: { default: `${brand.name} (${brand.latin}) | Digital Marketing & IT Services`, template: `%s | ${brand.name}` },
   description:
-    "Orbitra is a full-service digital studio: websites, SEO & digital marketing, mobile apps and business software for ambitious brands.",
+    `${brand.name} (${brand.latin}) is a full-service digital studio: websites, SEO & digital marketing, mobile apps and business software for ambitious brands.`,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${inter.variable} ${grotesk.variable} noise antialiased`}>
+      <body className={`${inter.variable} ${grotesk.variable} ${devanagari.variable} noise antialiased`}>
         <Preloader />
         <SmoothScroll>
           <ScrollProgress />

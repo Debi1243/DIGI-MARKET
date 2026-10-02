@@ -41,7 +41,7 @@ export default function WhyUs() {
     <section className="relative py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
-          eyebrow="Why Orbitra"
+          eyebrow="Why सृजEX"
           title="Four reasons teams stay with us for years"
           highlight={["years"]}
           text="We are not the cheapest and we are not the biggest. We are the partner who answers the phone, ships on time and cares about your numbers as much as you do."
