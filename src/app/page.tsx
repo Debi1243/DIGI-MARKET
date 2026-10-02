@@ -1,36 +1,59 @@
-import Hero from "@/components/sections/Hero";
-import Clients from "@/components/sections/Clients";
-import Intro from "@/components/sections/Intro";
-import ServicesHoverList from "@/components/sections/ServicesHoverList";
-import Process from "@/components/sections/Process";
-import WhyUs from "@/components/sections/WhyUs";
-import WorkShowcase from "@/components/sections/WorkShowcase";
-import TechStack from "@/components/sections/TechStack";
+import Hero from "@/components/sections/home/Hero";
+import ClientList from "@/components/sections/home/ClientList";
+import Disciplines from "@/components/sections/home/Disciplines";
+import SelectedWork from "@/components/sections/home/SelectedWork";
+import Industries from "@/components/sections/home/Industries";
+import ProcessSteps from "@/components/sections/ProcessSteps";
 import Testimonials from "@/components/sections/Testimonials";
 import Faq from "@/components/sections/Faq";
-import Cta from "@/components/sections/Cta";
+import ClosingCta from "@/components/sections/ClosingCta";
+import JsonLd from "@/components/shared/JsonLd";
+import { brand, homeFaqs, services } from "@/lib/data";
+import { absoluteUrl, siteUrl } from "@/lib/site";
 
-const faqs = [
-  { q: "What kinds of businesses do you work with?", a: "Startups, SMEs and enterprises across healthcare, education, hospitality, retail and professional services. If you have customers online, we can help you reach more of them." },
-  { q: "How much does a website or campaign cost?", a: "Websites start from a fixed-scope package and marketing runs on monthly retainers. After a free discovery call you get a transparent quote with no hidden hours." },
-  { q: "Can you take over an existing project?", a: "Yes. We start with a technical and marketing audit, stabilise what is there and then plan improvements with you." },
-  { q: "Do you sign NDAs and hand over source code?", a: "Always. You own everything we create for you, including code, designs and ad accounts." },
-];
-
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <Hero />
-      <Clients />
-      <Intro />
-      <ServicesHoverList />
-      <Process />
-      <WhyUs />
-      <WorkShowcase />
-      <TechStack />
+      <ClientList />
+      <Disciplines />
+      <SelectedWork />
+      <Industries />
+      <ProcessSteps />
       <Testimonials />
-      <Faq items={faqs} />
-      <Cta />
+      <Faq items={homeFaqs} />
+      <ClosingCta />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "@id": `${siteUrl}/#organization`,
+          name: brand.full,
+          alternateName: brand.name,
+          url: siteUrl,
+          logo: absoluteUrl("/icon.svg"),
+          email: brand.email,
+          telephone: brand.phone.replace(/\s/g, ""),
+          foundingDate: "2014",
+          slogan: brand.tagline,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Tech Park",
+            addressLocality: "Bhubaneswar",
+            addressRegion: "Odisha",
+            addressCountry: "IN",
+          },
+          areaServed: "IN",
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Services",
+            itemListElement: services.map((s) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name: s.title, url: absoluteUrl(`/services/${s.slug}`) },
+            })),
+          },
+        }}
+      />
     </>
   );
 }

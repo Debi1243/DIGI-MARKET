@@ -1,55 +1,58 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin } from "lucide-react";
-import PageHero from "@/components/ui/PageHero";
-import ContactForm from "@/components/sections/ContactForm";
-import Reveal from "@/components/ui/Reveal";
+import PageHero from "@/components/sections/PageHero";
+import ContactForm from "@/components/forms/ContactForm";
 import { brand } from "@/lib/data";
 
-export const metadata: Metadata = { title: "Contact" };
+const description =
+  "Tell us about your project. You will hear back within one business day with ideas, a timeline and a transparent quote.";
 
-const info = [
-  { icon: Mail, label: "Email", value: brand.email, href: `mailto:${brand.email}` },
-  { icon: Phone, label: "Phone", value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}` },
-  { icon: MapPin, label: "Studio", value: brand.address },
+export const metadata: Metadata = {
+  title: "Contact",
+  description,
+  alternates: { canonical: "/contact" },
+  openGraph: { title: "Contact", description, url: "/contact" },
+};
+
+const details = [
+  { label: "Email", value: brand.email, href: `mailto:${brand.email}` },
+  { label: "Phone", value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}` },
+  { label: "Studio", value: brand.address },
+  { label: "Hours", value: "Mon to Sat, 9:30 AM to 7:00 PM IST" },
 ];
 
 export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="Let's start something great together"
-        highlight={["great"]}
-        text="Share a few details and we will come back with ideas, a timeline and a transparent quote. No pressure, no jargon."
+        label="Contact"
+        title="Let's start something great together."
+        intro="Share a few details and we will come back with ideas, a timeline and a transparent quote. No pressure, no jargon."
       />
-      <section className="pb-32">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_1.6fr]">
-          <div className="space-y-4">
-            {info.map((i, k) => (
-              <Reveal key={i.label} delay={k * 0.1}>
-                <a href={i.href} className="group flex items-center gap-5 rounded-2xl border border-white/10 p-6 transition-colors hover:border-lime/50">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-lime transition-all duration-500 group-hover:scale-110 group-hover:bg-lime group-hover:text-ink">
-                    <i.icon className="h-6 w-6" />
-                  </span>
-                  <span>
-                    <span className="block text-xs uppercase tracking-[0.2em] text-muted">{i.label}</span>
-                    <span className="mt-1 block text-lg">{i.value}</span>
-                  </span>
-                </a>
-              </Reveal>
-            ))}
-            <Reveal delay={0.3}>
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 p-6">
-                <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-lime/20 blur-3xl" />
-                <p className="text-xs uppercase tracking-[0.2em] text-muted">Response time</p>
-                <p className="mt-2 font-display text-4xl font-semibold">&lt; 24 hours</p>
-                <p className="mt-2 text-sm text-muted">Mon to Sat, 9:30 AM to 7:00 PM IST</p>
-              </div>
-            </Reveal>
-          </div>
-          <Reveal delay={0.15}>
+      <section aria-label="Get in touch" className="border-t border-border pb-24 pt-12 md:pb-32 md:pt-16">
+        <div className="container-page grid gap-y-12 lg:grid-cols-12 lg:gap-x-10">
+          <aside className="lg:col-span-3">
+            <dl className="space-y-7">
+              {details.map((d) => (
+                <div key={d.label}>
+                  <dt className="label text-muted">{d.label}</dt>
+                  <dd className="mt-2 text-[0.9375rem]">
+                    {d.href ? (
+                      <a href={d.href} className="link-underline">{d.value}</a>
+                    ) : (
+                      d.value
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-10 border-t border-border pt-7">
+              <p className="label text-muted">Response time</p>
+              <p className="mt-3 font-display text-h3 font-medium">Under 24 hours</p>
+            </div>
+          </aside>
+          <div className="lg:col-span-9">
             <ContactForm />
-          </Reveal>
+          </div>
         </div>
       </section>
     </>

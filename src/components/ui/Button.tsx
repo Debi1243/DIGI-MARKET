@@ -1,45 +1,80 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import clsx from "clsx";
-import Magnetic from "./Magnetic";
+import type { ComponentProps, ReactNode } from "react";
+import { ArrowRight, LoaderCircle } from "lucide-react";
+import { cn } from "@/lib/cn";
 
-type Props = {
-  href: string;
-  children: React.ReactNode;
-  variant?: "primary" | "ghost" | "dark";
-  className?: string;
+type Variant = "primary" | "secondary" | "inverse";
+type Size = "md" | "lg";
+
+const base =
+  "group/btn relative inline-flex select-none items-center justify-center gap-2.5 whitespace-nowrap rounded-md font-medium " +
+  "transition-[background-color,border-color,color,transform] duration-200 ease-out active:translate-y-px " +
+  "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50";
+
+const variants: Record<Variant, string> = {
+  primary: "bg-primary text-primary-fg hover:bg-primary-hover",
+  secondary: "border border-border-strong text-fg hover:border-fg hover:bg-fg/[0.04]",
+  inverse: "bg-inverse-fg text-inverse hover:bg-primary hover:text-primary-fg",
 };
 
-export default function Button({ href, children, variant = "primary", className }: Props) {
+const sizes: Record<Size, string> = {
+  md: "h-11 px-4 text-sm",
+  lg: "h-13 px-5 text-[0.9375rem]",
+};
+
+export function buttonClasses({ variant = "primary", size = "md", className }: { variant?: Variant; size?: Size; className?: string } = {}) {
+  return cn(base, variants[variant], sizes[size], className);
+}
+
+function Arrow() {
+  return <ArrowRight aria-hidden className="size-4 transition-transform duration-200 ease-out group-hover/btn:translate-x-0.5" />;
+}
+
+type LinkProps = ComponentProps<typeof Link> & { variant?: Variant; size?: Size; arrow?: boolean; children: ReactNode };
+
+export function ButtonLink({ variant, size, arrow = true, className, children, ...props }: LinkProps) {
   return (
-    <Magnetic>
-      <Link
-        href={href}
-        className={clsx(
-          "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-sm font-semibold transition-colors",
-          variant === "primary" && "bg-lime text-ink",
-          variant === "dark" && "bg-ink text-paper",
-          variant === "ghost" && "border border-white/15 text-paper hover:border-white/40",
-          className,
-        )}
-      >
-        <span
-          className={clsx(
-            "absolute inset-0 translate-y-full rounded-full transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] group-hover:translate-y-0",
-            variant === "primary" ? "bg-white" : variant === "dark" ? "bg-violet" : "bg-white/10",
-          )}
-        />
-        <span className="relative">{children}</span>
-        <span
-          className={clsx(
-            "relative grid h-7 w-7 place-items-center overflow-hidden rounded-full",
-            variant === "primary" ? "bg-ink text-lime" : variant === "dark" ? "bg-lime text-ink" : "bg-white/10",
-          )}
-        >
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-6 group-hover:translate-x-6" />
-          <ArrowUpRight className="absolute h-4 w-4 -translate-x-6 translate-y-6 transition-transform duration-500 group-hover:translate-x-0 group-hover:translate-y-0" />
-        </span>
-      </Link>
-    </Magnetic>
+    <Link className={buttonClasses({ variant, size, className })} {...props}>
+      {children}
+      {arrow && <Arrow />}
+    </Link>
+  );
+}
+
+type ButtonProps = ComponentProps<"button"> & { variant?: Variant; size?: Size; loading?: boolean; loadingLabel?: string };
+
+export function Button({ variant, size, loading = false, loadingLabel, className, children, disabled, ...props }: ButtonProps) {
+  return (
+    <button
+      className={buttonClasses({ variant, size, className })}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...props}
+    >
+      {loading ? (
+        <>
+          <LoaderCircle aria-hidden className="size-4 animate-spin" />
+          {loadingLabel ?? children}
+        </>
+      ) : (
+        <>
+          {children}
+          <Arrow />
+        </>
+      )}
+    </button>
+  );
+}
+
+/** Quiet text link with a trailing arrow, for tertiary actions. */
+export function TextLink({ className, children, ...props }: ComponentProps<typeof Link>) {
+  return (
+    <Link
+      className={cn("group/btn inline-flex items-center gap-2 text-sm font-medium text-fg hover:text-accent", className)}
+      {...props}
+    >
+      <span className="link-underline">{children}</span>
+      <Arrow />
+    </Link>
   );
 }

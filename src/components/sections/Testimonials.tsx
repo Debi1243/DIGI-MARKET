@@ -1,62 +1,41 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Quote, ArrowLeft, ArrowRight } from "lucide-react";
 import { testimonials } from "@/lib/data";
-import SectionHeading from "../ui/SectionHeading";
 
 export default function Testimonials() {
-  const [[i, dir], set] = useState<[number, number]>([0, 1]);
-  const go = (d: number) => set(([n]) => [(n + d + testimonials.length) % testimonials.length, d]);
-
-  useEffect(() => {
-    const id = window.setInterval(() => set(([n]) => [(n + 1) % testimonials.length, 1]), 6000);
-    return () => window.clearInterval(id);
-  }, [i]);
-
-  const t = testimonials[i];
+  const [lead, ...rest] = testimonials;
   return (
-    <section className="relative overflow-hidden py-24">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet/15 blur-[140px]" />
-      <div className="relative mx-auto max-w-5xl px-6 text-center">
-        <SectionHeading eyebrow="Client love" title="Don't take our word for it" align="center" highlight={["word"]} />
-        <div className="relative mt-16 min-h-[18rem] md:min-h-[16rem]">
-          <Quote className="mx-auto h-12 w-12 text-lime" />
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={i}
-              custom={dir}
-              initial={{ opacity: 0, x: dir * 80, filter: "blur(10px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, x: dir * -80, filter: "blur(10px)" }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="mt-8 font-display text-2xl font-medium leading-snug tracking-tight md:text-4xl">&ldquo;{t.quote}&rdquo;</p>
-              <p className="mt-8 font-semibold">{t.name}</p>
-              <p className="text-sm text-muted">{t.role}</p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <div className="mt-10 flex items-center justify-center gap-6">
-          <button onClick={() => go(-1)} aria-label="Previous" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white hover:text-ink">
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <div className="flex gap-2">
-            {testimonials.map((_, k) => (
-              <button key={k} onClick={() => set([k, k > i ? 1 : -1])} aria-label={`Testimonial ${k + 1}`} className="relative h-1.5 w-8 overflow-hidden rounded-full bg-white/15">
-                {k === i && (
-                  <motion.span layoutId="t-dot" className="absolute inset-0 bg-lime">
-                    <motion.span className="absolute inset-0 origin-left bg-white/50" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 6, ease: "linear" }} />
-                  </motion.span>
-                )}
-              </button>
-            ))}
-          </div>
-          <button onClick={() => go(1)} aria-label="Next" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white hover:text-ink">
-            <ArrowRight className="h-5 w-5" />
-          </button>
-        </div>
+    <section aria-labelledby="testimonials-title" className="section-y border-t border-border">
+      <div className="container-page grid gap-y-14 lg:grid-cols-12 lg:gap-x-10">
+        <h2 id="testimonials-title" className="label text-muted lg:col-span-3 lg:pt-3">
+          In our clients&apos; words
+        </h2>
+        <figure className="reveal lg:col-span-9">
+          <blockquote className="max-w-[28ch] font-display text-[clamp(1.75rem,1.2rem+2.2vw,3rem)] font-medium leading-[1.12] tracking-[-0.025em]">
+            <p>&ldquo;{lead.quote}&rdquo;</p>
+          </blockquote>
+          <figcaption className="mt-8 flex items-center gap-4 text-sm">
+            <span aria-hidden className="h-px w-8 bg-fg" />
+            <span>
+              <span className="font-medium">{lead.name}</span>
+              <span className="text-muted">, {lead.role}</span>
+            </span>
+          </figcaption>
+        </figure>
+
+        <ul className="grid gap-px bg-border md:grid-cols-3 lg:col-span-9 lg:col-start-4">
+          {rest.map((t) => (
+            <li key={t.name} className="reveal bg-bg py-8 md:px-6 md:first:pl-0 md:last:pr-0">
+              <figure>
+                <blockquote className="text-[0.9375rem] leading-relaxed">
+                  <p>&ldquo;{t.quote}&rdquo;</p>
+                </blockquote>
+                <figcaption className="mt-5 text-sm">
+                  <span className="block font-medium">{t.name}</span>
+                  <span className="block text-muted">{t.role}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

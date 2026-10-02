@@ -34,7 +34,6 @@ export type Service = {
   short: string;
   category: ServiceCategory;
   icon: LucideIcon;
-  accent: string; // tailwind gradient stops
   intro: string;
   features: { title: string; text: string }[];
   deliverables: string[];
@@ -64,7 +63,6 @@ export const services: Service[] = [
     short: "Conversion-first websites that load fast, look sharp and turn visitors into leads.",
     category: "Design",
     icon: Monitor,
-    accent: "from-violet-500 to-fuchsia-500",
     intro:
       "Your website is your hardest working salesperson. We craft responsive, accessible and lightning-fast sites with motion, clarity and a clear path to action on every screen.",
     features: [
@@ -87,7 +85,6 @@ export const services: Service[] = [
     short: "Data-led SEO, social and paid campaigns that compound into predictable growth.",
     category: "Marketing",
     icon: TrendingUp,
-    accent: "from-lime-400 to-emerald-500",
     intro:
       "Traffic is only useful when it converts. We combine technical SEO, content, social media and performance ads into one growth engine measured against revenue, not vanity metrics.",
     features: [
@@ -110,7 +107,6 @@ export const services: Service[] = [
     short: "Native-feel Android and iOS apps built with Flutter and React Native.",
     category: "Development",
     icon: Smartphone,
-    accent: "from-sky-400 to-indigo-500",
     intro:
       "From MVP to scale, we build mobile apps that feel effortless. One codebase, two stores, and an architecture ready for the features you have not thought of yet.",
     features: [
@@ -133,7 +129,6 @@ export const services: Service[] = [
     short: "Transactional and promotional messaging with DLT compliance and real-time reports.",
     category: "Marketing",
     icon: MessageSquareText,
-    accent: "from-amber-400 to-orange-500",
     intro:
       "Reach customers where they read. Our messaging platform delivers OTPs, alerts and campaigns over SMS and WhatsApp with high delivery rates and full compliance.",
     features: [
@@ -156,7 +151,6 @@ export const services: Service[] = [
     short: "Fast invoicing, stock control and GST-ready reports for retail and wholesale.",
     category: "Software",
     icon: Receipt,
-    accent: "from-teal-400 to-cyan-500",
     intro:
       "Bill in seconds, know your stock in real time and file GST without stress. Our billing suite works on desktop, web and mobile with offline support.",
     features: [
@@ -179,7 +173,6 @@ export const services: Service[] = [
     short: "Pipeline, follow-ups and customer history in one place your sales team will use.",
     category: "Software",
     icon: Users,
-    accent: "from-pink-500 to-rose-500",
     intro:
       "Stop losing leads in spreadsheets. Our CRM captures enquiries from every channel, automates follow-ups and shows you exactly where revenue is coming from.",
     features: [
@@ -202,7 +195,6 @@ export const services: Service[] = [
     short: "Attendance, payroll and compliance automated, from biometric to bank transfer.",
     category: "Software",
     icon: Wallet,
-    accent: "from-emerald-400 to-teal-500",
     intro:
       "Run payroll in minutes, not days. Attendance, leave, PF, ESI and TDS are calculated for you, with payslips delivered straight to employees' phones.",
     features: [
@@ -225,7 +217,6 @@ export const services: Service[] = [
     short: "OPD, IPD, pharmacy, lab and billing connected in one secure platform.",
     category: "Software",
     icon: Hospital,
-    accent: "from-cyan-400 to-blue-500",
     intro:
       "Give clinicians more time for patients. Our HMS digitises every department from front desk to discharge with secure records and real-time bed management.",
     features: [
@@ -248,7 +239,6 @@ export const services: Service[] = [
     short: "Reservations, front desk, housekeeping and POS for modern hospitality.",
     category: "Software",
     icon: Hotel,
-    accent: "from-orange-400 to-red-500",
     intro:
       "Delight guests and fill more rooms. Our property management system unifies bookings, channel manager, restaurant POS and housekeeping in a single dashboard.",
     features: [
@@ -271,7 +261,6 @@ export const services: Service[] = [
     short: "Admissions, fees, attendance and parent communication for K-12.",
     category: "Software",
     icon: School,
-    accent: "from-yellow-400 to-amber-500",
     intro:
       "Bring schools, teachers and parents onto one page. Automate fee collection, attendance and report cards while keeping parents informed in real time.",
     features: [
@@ -294,7 +283,6 @@ export const services: Service[] = [
     short: "Academic, examination and accreditation workflows for higher education.",
     category: "Software",
     icon: GraduationCap,
-    accent: "from-indigo-400 to-violet-500",
     intro:
       "A campus ERP built for the complexity of higher education, from choice-based credit systems to NAAC documentation and placement tracking.",
     features: [
@@ -317,7 +305,6 @@ export const services: Service[] = [
     short: "Memberships, renewals, trainers and access control for fitness studios.",
     category: "Software",
     icon: Dumbbell,
-    accent: "from-red-500 to-pink-500",
     intro:
       "Keep members coming back. Automate renewals, track workouts and manage trainers with a branded member app and biometric access.",
     features: [
@@ -340,7 +327,6 @@ export const services: Service[] = [
     short: "Memorable logos and brand systems that make you instantly recognisable.",
     category: "Design",
     icon: PenTool,
-    accent: "from-fuchsia-500 to-purple-600",
     intro:
       "A brand is a promise you keep everywhere. We build identities with strategy behind them: logo, colour, type, voice and a guide your whole team can follow.",
     features: [
@@ -363,7 +349,6 @@ export const services: Service[] = [
     short: "Shareable NFC and QR cards that update instantly and capture leads.",
     category: "Design",
     icon: IdCard,
-    accent: "from-sky-400 to-cyan-400",
     intro:
       "Never run out of cards again. Share your details, portfolio, payment links and location with a tap or a scan, and see who viewed them.",
     features: [
@@ -386,7 +371,6 @@ export const services: Service[] = [
     short: "CCTV, networking, firewalls and AMC support that keeps your business running.",
     category: "Development",
     icon: ShieldCheck,
-    accent: "from-slate-400 to-zinc-500",
     intro:
       "Reliable infrastructure is invisible until it fails. We design, install and maintain networks, surveillance and endpoint security so you can focus on work.",
     features: [
@@ -496,48 +480,87 @@ export const tech = [
   "Shopify",
 ];
 
-export const projects = [
+export type CoverTone = "sage" | "clay" | "sky" | "sand" | "lilac" | "rose";
+export type CoverChart = "growth" | "decline" | "rating" | "compare" | "ring" | "retention";
+
+export type Project = {
+  title: string;
+  category: string;
+  result: string;
+  metric: string;
+  metricLabel: string;
+  summary: string;
+  tags: string[];
+  service: string;
+  cover: { tone: CoverTone; chart: CoverChart };
+};
+
+export const projects: Project[] = [
   {
     title: "Bloom Organics",
     category: "Website + SEO",
     result: "+312% organic traffic",
-    gradient: "from-lime-300 via-emerald-400 to-teal-600",
+    metric: "+312%",
+    metricLabel: "Organic traffic in six months",
+    summary: "A rebuilt storefront and a content-led SEO programme that tripled organic enquiries.",
     tags: ["Next.js", "Shopify", "SEO"],
+    service: "digital-marketing",
+    cover: { tone: "sage", chart: "growth" },
   },
   {
     title: "CarePoint HMS",
     category: "Hospital Software",
     result: "40% shorter wait times",
-    gradient: "from-sky-300 via-blue-500 to-indigo-700",
+    metric: "−40%",
+    metricLabel: "Front-desk wait time",
+    summary: "Hospital management rolled out across three branches without a single day of downtime.",
     tags: ["Laravel", "Vue", "AWS"],
+    service: "hospital-management",
+    cover: { tone: "sky", chart: "decline" },
   },
   {
     title: "Swiftcart",
     category: "Mobile App",
     result: "4.8★ across 200k installs",
-    gradient: "from-fuchsia-400 via-violet-500 to-indigo-700",
+    metric: "4.8★",
+    metricLabel: "Store rating across 200k installs",
+    summary: "A cross-platform shopping app shipped on schedule, with ratings that kept climbing after launch.",
     tags: ["Flutter", "Firebase"],
+    service: "mobile-apps",
+    cover: { tone: "lilac", chart: "rating" },
   },
   {
     title: "Nimbus Hotels",
     category: "Hotel Software + Ads",
     result: "+28% direct bookings",
-    gradient: "from-amber-300 via-orange-500 to-rose-600",
+    metric: "+28%",
+    metricLabel: "Direct bookings",
+    summary: "A commission-free booking engine paired with search campaigns that pulled guests away from OTAs.",
     tags: ["PMS", "Google Ads"],
+    service: "hotel-management",
+    cover: { tone: "clay", chart: "compare" },
   },
   {
     title: "EduSphere",
     category: "School ERP",
     result: "95% on-time fee collection",
-    gradient: "from-yellow-300 via-amber-400 to-orange-600",
+    metric: "95%",
+    metricLabel: "Fees collected on time",
+    summary: "Admissions, fees and a parent app on one platform, with reminders that do the chasing.",
     tags: ["React", "Node.js"],
+    service: "school-management",
+    cover: { tone: "sand", chart: "ring" },
   },
   {
     title: "IronCore Gyms",
     category: "Brand + Member App",
     result: "30% higher retention",
-    gradient: "from-rose-400 via-red-500 to-zinc-800",
+    metric: "+30%",
+    metricLabel: "Member retention",
+    summary: "A sharper brand and a member app for bookings and renewals that keeps members coming back.",
     tags: ["Branding", "React Native"],
+    service: "gym-management",
+    cover: { tone: "rose", chart: "retention" },
   },
 ];
 
@@ -559,3 +582,84 @@ export const whyUs = [
     text: "We stick around. Care plans, growth sprints and a support line that answers fast.",
   },
 ];
+
+export const categories: { name: ServiceCategory; slug: string; summary: string }[] = [
+  {
+    name: "Marketing",
+    slug: "marketing",
+    summary: "Get found, get chosen. SEO, social, paid media and messaging measured against revenue.",
+  },
+  {
+    name: "Design",
+    slug: "design",
+    summary: "Websites, identities and touchpoints that make a business look as good as it is.",
+  },
+  {
+    name: "Development",
+    slug: "development",
+    summary: "Mobile apps and the infrastructure underneath, built to keep working.",
+  },
+  {
+    name: "Software",
+    slug: "software",
+    summary: "Ready-to-deploy platforms for hospitals, schools, hotels, gyms, retail and HR.",
+  },
+];
+
+export const industries = [
+  { label: "Healthcare", service: "hospital-management" },
+  { label: "Schools", service: "school-management" },
+  { label: "Higher education", service: "college-management" },
+  { label: "Hospitality", service: "hotel-management" },
+  { label: "Retail", service: "billing-software" },
+  { label: "Sales teams", service: "crm-software" },
+  { label: "Fitness", service: "gym-management" },
+  { label: "HR & payroll", service: "payroll-software" },
+];
+
+export const milestones = [
+  { year: "2014", title: "Lift-off", text: "Started as a two-person web studio building sites for local businesses." },
+  { year: "2016", title: "Software suite", text: "Launched our billing and school management products, now used by thousands." },
+  { year: "2019", title: "Growth marketing", text: "Added SEO, social and paid media to help clients get found and convert." },
+  { year: "2022", title: "Mobile first", text: "Opened our app studio and shipped our 50th Flutter app." },
+  { year: "2026", title: "AI-assisted delivery", text: "AI-powered audits and automation help us ship faster without cutting corners." },
+];
+
+export const pillars = [
+  { title: "Mission", text: "Give every growing business access to world-class digital products and marketing, without enterprise price tags." },
+  { title: "Vision", text: "To be the most trusted technology partner for ambitious companies across India and beyond." },
+  { title: "Values", text: "Quality over shortcuts, radical transparency, and measuring our success by the success of our clients." },
+];
+
+export const homeFaqs = [
+  {
+    q: "What kinds of businesses do you work with?",
+    a: "Startups, SMEs and enterprises across healthcare, education, hospitality, retail and professional services. If you have customers online, we can help you reach more of them.",
+  },
+  {
+    q: "How much does a website or campaign cost?",
+    a: "Websites start from a fixed-scope package and marketing runs on monthly retainers. After a free discovery call you get a transparent quote with no hidden hours.",
+  },
+  {
+    q: "Can you take over an existing project?",
+    a: "Yes. We start with a technical and marketing audit, stabilise what is there and then plan improvements with you.",
+  },
+  {
+    q: "Do you sign NDAs and hand over source code?",
+    a: "Always. You own everything we create for you, including code, designs and ad accounts.",
+  },
+];
+
+export const servicesBySlug = new Map(services.map((s) => [s.slug, s]));
+
+export function getService(slug: string) {
+  return servicesBySlug.get(slug);
+}
+
+export function servicesIn(category: ServiceCategory) {
+  return services.filter((s) => s.category === category);
+}
+
+export function formatStat({ value, suffix }: { value: number; suffix: string }) {
+  return `${value.toLocaleString("en-IN")}${suffix}`;
+}

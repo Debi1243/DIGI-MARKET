@@ -1,49 +1,41 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
-import SectionHeading from "../ui/SectionHeading";
+import JsonLd from "@/components/shared/JsonLd";
 
-export default function Faq({ items, title = "Questions, answered" }: { items: { q: string; a: string }[]; title?: string }) {
-  const [open, setOpen] = useState<number | null>(0);
+type Item = { q: string; a: string };
+
+export default function Faq({ items, title = "Questions, answered.", name = "faq" }: { items: Item[]; title?: string; name?: string }) {
   return (
-    <section className="py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1fr_1.4fr]">
-        <SectionHeading eyebrow="FAQ" title={title} highlight={["answered"]} />
-        <ul className="divide-y divide-white/10 border-y border-white/10">
-          {items.map((f, i) => (
-            <li key={f.q}>
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left"
-                aria-expanded={open === i}
-              >
-                <span className="font-display text-lg font-medium md:text-xl">{f.q}</span>
-                <motion.span
-                  animate={{ rotate: open === i ? 135 : 0, backgroundColor: open === i ? "#c6ff3d" : "rgba(255,255,255,0.06)" }}
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full"
-                >
-                  <Plus className={open === i ? "h-5 w-5 text-ink" : "h-5 w-5"} />
-                </motion.span>
-              </button>
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <p className="pb-6 pr-16 leading-relaxed text-muted">{f.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </li>
-          ))}
-        </ul>
+    <section aria-labelledby={`${name}-title`} className="section-y border-t border-border">
+      <div className="container-page grid gap-y-10 lg:grid-cols-12 lg:gap-x-10">
+        <div className="lg:col-span-3">
+          <p className="label text-muted lg:pt-3">FAQ</p>
+        </div>
+        <div className="lg:col-span-9">
+          <h2 id={`${name}-title`} className="font-display text-h2 font-medium">
+            {title}
+          </h2>
+          <div className="mt-10 border-t border-border md:mt-14">
+            {items.map((f, i) => (
+              <details key={f.q} name={name} open={i === 0} className="disclosure group border-b border-border">
+                <summary className="flex cursor-pointer items-center justify-between gap-6 py-6 text-left font-display text-lg font-medium tracking-[-0.01em] transition-colors hover:text-accent md:text-xl">
+                  {f.q}
+                  <span className="grid size-9 shrink-0 place-items-center rounded-md border border-border transition-[transform,background-color,border-color] duration-300 group-open:rotate-45 group-open:border-fg group-open:bg-fg group-open:text-bg">
+                    <Plus aria-hidden className="size-4" />
+                  </span>
+                </summary>
+                <p className="max-w-[62ch] pb-7 pr-12 leading-relaxed text-muted">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        }}
+      />
     </section>
   );
 }

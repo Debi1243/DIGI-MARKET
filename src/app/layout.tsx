@@ -1,35 +1,59 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Cursor from "@/components/Cursor";
-import ScrollProgress from "@/components/ScrollProgress";
-import Preloader from "@/components/Preloader";
+import SiteHeader from "@/components/navigation/SiteHeader";
+import SiteFooter from "@/components/layout/SiteFooter";
+import MotionProvider from "@/components/shared/MotionProvider";
+import { themeScript } from "@/components/navigation/ThemeToggle";
 import { brand } from "@/lib/data";
+import { siteUrl } from "@/lib/site";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk" });
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", display: "swap" });
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+
+const description =
+  "Orbitra is a full-service digital studio in Bhubaneswar: websites, SEO and digital marketing, mobile apps and business software for ambitious brands.";
 
 export const metadata: Metadata = {
-  title: { default: `${brand.name} | Digital Marketing & IT Services`, template: `%s | ${brand.name}` },
-  description:
-    "Orbitra is a full-service digital studio: websites, SEO & digital marketing, mobile apps and business software for ambitious brands.",
+  metadataBase: new URL(siteUrl),
+  title: { default: `${brand.name} — Digital marketing, design & software studio`, template: `%s · ${brand.name}` },
+  description,
+  applicationName: brand.full,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: brand.full,
+    locale: "en_IN",
+    url: "/",
+    title: `${brand.name} — Digital marketing, design & software studio`,
+    description,
+  },
+  twitter: { card: "summary_large_image", title: brand.name, description },
+  formatDetection: { telephone: false },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0e0c" },
+  ],
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${grotesk.variable} noise antialiased`}>
-        <Preloader />
-        <SmoothScroll>
-          <ScrollProgress />
-          <Cursor />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </SmoothScroll>
+    <html lang="en-IN" suppressHydrationWarning className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="flex min-h-svh flex-col">
+        <MotionProvider>
+          <SiteHeader />
+          <main id="main" tabIndex={-1} className="flex-1 outline-none">
+            {children}
+          </main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );

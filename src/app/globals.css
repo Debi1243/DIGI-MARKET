@@ -1,87 +1,317 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────
+   Design tokens
+   Colour is defined once as CSS variables and mapped into Tailwind
+   below, so light/dark is a variable swap, never a class rewrite.
+   ────────────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light;
+
+  --bg: #f4f2ec;
+  --surface: #faf9f5;
+  --elevated: #ffffff;
+  --fg: #16150f;
+  --fg-muted: #5c584f;
+  --border: #dedad0;
+  --border-strong: #c4bfb2;
+
+  --primary: #ff5a1f;
+  --primary-hover: #ff7038;
+  --primary-fg: #16150f;
+  --accent: #b23a0c;
+
+  --inverse: #16150f;
+  --inverse-fg: #f4f2ec;
+  --inverse-muted: #a6a195;
+  --inverse-border: #2e2c26;
+
+  --success: #1d7348;
+  --warning: #8f5600;
+  --error: #b8322a;
+
+  --tone-sage: #dce4d4;
+  --tone-clay: #ecd8ca;
+  --tone-sky: #d5dee7;
+  --tone-sand: #ebe2c8;
+  --tone-lilac: #dedaea;
+  --tone-rose: #ecd5d3;
+
+  --shadow-sm: 0 1px 0 rgb(22 21 15 / 0.04), 0 1px 2px rgb(22 21 15 / 0.06);
+  --shadow-md: 0 1px 2px rgb(22 21 15 / 0.05), 0 4px 12px rgb(22 21 15 / 0.05), 0 16px 32px -12px rgb(22 21 15 / 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #0f0e0c;
+    --surface: #161512;
+    --elevated: #1d1b17;
+    --fg: #eeebe4;
+    --fg-muted: #a39e92;
+    --border: #2a2823;
+    --border-strong: #3d3a32;
+
+    --primary: #ff6a33;
+    --primary-hover: #ff8352;
+    --primary-fg: #16150f;
+    --accent: #ff8f63;
+
+    --inverse: #1a1915;
+    --inverse-fg: #eeebe4;
+    --inverse-muted: #a39e92;
+    --inverse-border: #312e28;
+
+    --success: #4cc38a;
+    --warning: #e3a33f;
+    --error: #f07062;
+
+    --tone-sage: #1f2620;
+    --tone-clay: #2a201b;
+    --tone-sky: #1b2128;
+    --tone-sand: #28241a;
+    --tone-lilac: #211f29;
+    --tone-rose: #2a1e1e;
+
+    --shadow-sm: 0 1px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f0e0c;
+  --surface: #161512;
+  --elevated: #1d1b17;
+  --fg: #eeebe4;
+  --fg-muted: #a39e92;
+  --border: #2a2823;
+  --border-strong: #3d3a32;
+
+  --primary: #ff6a33;
+  --primary-hover: #ff8352;
+  --primary-fg: #16150f;
+  --accent: #ff8f63;
+
+  --inverse: #1a1915;
+  --inverse-fg: #eeebe4;
+  --inverse-muted: #a39e92;
+  --inverse-border: #312e28;
+
+  --success: #4cc38a;
+  --warning: #e3a33f;
+  --error: #f07062;
+
+  --tone-sage: #1f2620;
+  --tone-clay: #2a201b;
+  --tone-sky: #1b2128;
+  --tone-sand: #28241a;
+  --tone-lilac: #211f29;
+  --tone-rose: #2a1e1e;
+
+  --shadow-sm: 0 1px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+}
+
 @theme inline {
-  --color-ink: #07070c;
-  --color-ink-2: #0e0e17;
-  --color-ink-3: #161623;
-  --color-paper: #f4f3ff;
-  --color-muted: #9b99b5;
-  --color-violet: #7c5cff;
-  --color-cyan: #2de2e6;
-  --color-lime: #c6ff3d;
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-grotesk);
-  --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
-  --animate-spin-slow: spin 24s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
+  --color-inverse: var(--inverse);
+  --color-inverse-fg: var(--inverse-fg);
+  --color-inverse-muted: var(--inverse-muted);
+  --color-inverse-border: var(--inverse-border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-tone-sage: var(--tone-sage);
+  --color-tone-clay: var(--tone-clay);
+  --color-tone-sky: var(--tone-sky);
+  --color-tone-sand: var(--tone-sand);
+  --color-tone-lilac: var(--tone-lilac);
+  --color-tone-rose: var(--tone-rose);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
+@theme {
+  /* Radius: small and consistent. Pills only for tags. */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  /* Type scale. Fluid only where size carries hierarchy. */
+  --text-display: clamp(2.625rem, 1.55rem + 4.6vw, 5.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+  --text-h1: clamp(2.25rem, 1.55rem + 3vw, 4.5rem);
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h2: clamp(1.875rem, 1.4rem + 1.9vw, 3.25rem);
+  --text-h2--line-height: 1.04;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h3: clamp(1.25rem, 1.12rem + 0.5vw, 1.5rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.012em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.55;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.08em;
 
-body {
-  background: var(--color-ink);
-  color: var(--color-paper);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 
-::selection { background: var(--color-lime); color: var(--color-ink); }
-
-.text-gradient {
-  background: linear-gradient(100deg, #c6ff3d 0%, #2de2e6 45%, #7c5cff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  --animate-orbit: orbit 64s linear infinite;
 }
 
-.noise::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+@keyframes orbit {
+  to { transform: rotate(360deg); }
 }
 
-.glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(14px);
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: none; }
 }
 
-.spotlight {
-  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(124,92,255,0.18), transparent 45%);
+/* ──────────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  ::selection { background: var(--primary); color: var(--primary-fg); }
+
+  :focus-visible {
+    outline: 2px solid var(--focus, var(--fg));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
-.outline-text {
-  -webkit-text-stroke: 1px rgba(244,243,255,0.25);
-  color: transparent;
+/* ──────────────────────────────────────────────────────────────
+   Utilities
+   ────────────────────────────────────────────────────────────── */
+
+@utility container-page {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) { padding-inline: 1.5rem; }
+  @media (width >= 64rem) { padding-inline: 2.5rem; }
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .has-cursor, .has-cursor * { cursor: none !important; }
+@utility section-y {
+  padding-block: 5rem;
+
+  @media (width >= 48rem) { padding-block: 7rem; }
+  @media (width >= 80rem) { padding-block: 8.5rem; }
 }
+
+@utility label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* Inverted band: dark surface in both themes. */
+@utility surface-inverse {
+  background: var(--inverse);
+  color: var(--inverse-fg);
+  border-block: 1px solid var(--inverse-border);
+  --focus: var(--inverse-fg);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Underline that draws in on hover; used for inline and nav links. */
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 350ms var(--ease-out-quart);
+
+  &:hover, &:focus-visible { background-size: 100% 1px; }
+}
+
+/* Scroll reveal, driven by CSS scroll timelines. Browsers without
+   support (or users who prefer reduced motion) simply see the content. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* Accordion height animation for <details>, where supported. */
+@media (prefers-reduced-motion: no-preference) {
+  .disclosure {
+    interpolate-size: allow-keywords;
+  }
+  .disclosure::details-content {
+    height: 0;
+    overflow: clip;
+    transition: height 320ms var(--ease-out-quart), content-visibility 320ms allow-discrete;
+  }
+  .disclosure[open]::details-content {
+    height: auto;
+  }
+}
+
+.disclosure > summary { list-style: none; }
+.disclosure > summary::-webkit-details-marker { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

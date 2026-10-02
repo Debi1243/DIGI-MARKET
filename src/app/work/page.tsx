@@ -1,32 +1,43 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/ui/PageHero";
-import { ProjectCard } from "@/components/sections/WorkShowcase";
+import PageHero from "@/components/sections/PageHero";
+import ProjectCard from "@/components/work/ProjectCard";
 import Testimonials from "@/components/sections/Testimonials";
-import Clients from "@/components/sections/Clients";
-import Cta from "@/components/sections/Cta";
+import ClosingCta from "@/components/sections/ClosingCta";
 import { projects } from "@/lib/data";
 
-export const metadata: Metadata = { title: "Work" };
+const description =
+  "Websites, apps, campaigns and software we have designed, built and grown with our clients, and the results they produced.";
+
+export const metadata: Metadata = {
+  title: "Work",
+  description,
+  alternates: { canonical: "/work" },
+  openGraph: { title: "Work", description, url: "/work" },
+};
 
 export default function WorkPage() {
+  const [feature, ...rest] = projects;
   return (
     <>
       <PageHero
-        eyebrow="Portfolio"
-        title="Work that moves the needle"
-        highlight={["needle"]}
-        text="A selection of websites, apps, campaigns and software we have designed, built and grown with our clients."
+        label="Work"
+        title="Work that moves the needle."
+        intro="A selection of websites, apps, campaigns and software we have designed, built and grown with our clients."
       />
-      <section className="pb-24">
-        <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-16 px-6 md:grid-cols-2">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.title} p={p} i={i} />
-          ))}
+      <section aria-label="Projects" className="border-t border-border section-y">
+        <div className="container-page space-y-16 md:space-y-24">
+          <ProjectCard project={feature} layout="feature" headingLevel="h2" />
+          <div className="grid gap-x-10 gap-y-16 md:grid-cols-2 md:gap-y-8">
+            {rest.map((p, i) => (
+              <div key={p.title} className={i % 2 === 1 ? "md:mt-24" : undefined}>
+                <ProjectCard project={p} headingLevel="h2" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <Clients />
       <Testimonials />
-      <Cta />
+      <ClosingCta />
     </>
   );
 }

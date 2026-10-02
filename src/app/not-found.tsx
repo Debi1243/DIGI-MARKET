@@ -1,14 +1,18 @@
-import Button from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <section className="relative grid min-h-[80vh] place-items-center px-6 pt-32 text-center">
-      <div className="grid-bg pointer-events-none absolute inset-0" />
-      <div className="relative">
-        <p className="outline-text font-display text-[30vw] font-bold leading-none md:text-[16rem]">404</p>
-        <h1 className="font-display text-3xl font-semibold">Lost in orbit</h1>
-        <p className="mt-3 text-muted">The page you are looking for drifted off. Let&apos;s get you back.</p>
-        <div className="mt-8"><Button href="/">Back to home</Button></div>
+    <section className="container-page grid min-h-[60vh] content-center gap-y-8 py-24 lg:grid-cols-12 lg:gap-x-10">
+      <p className="label text-muted lg:col-span-3 lg:pt-4">Error 404</p>
+      <div className="lg:col-span-9">
+        <h1 className="max-w-[16ch] font-display text-h1 font-medium">This page has drifted out of orbit.</h1>
+        <p className="mt-6 max-w-[48ch] text-lead text-muted">
+          The link may be old or mistyped. Head back home, or browse everything we do.
+        </p>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="/" size="lg">Back to home</ButtonLink>
+          <ButtonLink href="/services" size="lg" variant="secondary" arrow={false}>Browse services</ButtonLink>
+        </div>
       </div>
     </section>
   );

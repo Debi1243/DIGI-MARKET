@@ -1,30 +1,64 @@
-# Orbitra — Digital Marketing & IT Services Website
+# Orbitra — Digital studio website
 
-A Next.js 15 (App Router, TypeScript, Tailwind CSS v4) agency site inspired by the structure of itinfoways.com/services, with original copy and branding.
+Marketing site for Orbitra Digital Labs: websites, SEO & digital marketing, mobile apps and industry software.
+
+Built with Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS 4, Motion and Zod.
 
 ## Run it
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
 npm run build && npm start
 ```
 
-## Pages
-- `/` Home: hero, clients marquee, scroll-scrubbed intro + counters, services hover list, pinned horizontal process, stacking "why us" cards, work showcase, tech marquee, testimonials carousel, FAQ, clip-path CTA
-- `/services` All 15 services with animated category filter and 3D tilt + spotlight cards
-- `/services/[slug]` 15 statically generated service pages (stats, features, deliverables, process, FAQ, related)
-- `/about` Mission/vision/values, scroll-drawn timeline
-- `/work` Portfolio with parallax browser mockups
-- `/contact` Animated form with floating labels, chips, budget selector, validation and success state
+## Environment
 
-## Animation stack
-- **Lenis** smooth scrolling synced to the GSAP ticker (`src/components/SmoothScroll.tsx`)
-- **GSAP + ScrollTrigger** pinned horizontal process and scrubbed text reveal
-- **Framer Motion** split-text reveals, magnetic buttons, custom cursor, page transitions, layout animations, parallax, preloader
-- Respects `prefers-reduced-motion`
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin used for metadata, sitemap and structured data. Defaults to `https://orbitra.studio`. |
+| `CONTACT_WEBHOOK_URL` | Where contact form submissions are POSTed as JSON (Zapier, Make, Slack, a CRM, your own API). Without it, the form succeeds only in local development and shows an "email us" fallback in production. |
+
+## Pages
+
+All pages are statically generated.
+
+- `/` Hero with the discipline diagram, key numbers, disciplines index, selected work, industry software tabs, process, testimonials, FAQ
+- `/services` Every service grouped by discipline, with in-page category links
+- `/services/[slug]` 15 service pages: numbers at a glance, what's included, deliverables, process, FAQ, related services
+- `/about` Story, mission/vision/values, timeline, why Orbitra
+- `/work` Case studies with data-driven covers
+- `/contact` Contact details and a validated form backed by a Server Action
+
+Also generated: `sitemap.xml`, `robots.txt`, Open Graph image, SVG favicon and JSON-LD (organisation, services, breadcrumbs, FAQ).
+
+## Structure
+
+```
+src/
+  app/                 routes, metadata files, contact Server Action
+  components/
+    navigation/        header, services menu, mobile menu, theme toggle
+    layout/            footer
+    sections/          page sections (home/ holds home-only ones)
+    work/              project card and generated covers
+    forms/             form fields and the contact form
+    ui/                buttons, logo, section header, tag
+    shared/            JSON-LD, Motion config
+  lib/                 content (data.ts), site config, contact schema
+```
 
 ## Customise
-- All copy, services, stats, projects and testimonials live in `src/lib/data.ts`.
-- Brand colours are tokens in `src/app/globals.css` (`--color-lime`, `--color-violet`, `--color-cyan`, …).
-- The contact form currently simulates submission (`src/components/sections/ContactForm.tsx`); wire it to an API route, Formspree, Resend, etc.
+
+- Copy, services, numbers, projects and testimonials live in `src/lib/data.ts`.
+- Colours, type scale, radii and shadows are tokens at the top of `src/app/globals.css`, with light and dark values.
+- Case-study covers are drawn from each project's `cover` setting (tone + chart type) in `data.ts`.
+
+## Design notes
+
+- Type: Bricolage Grotesque for display, Geist for text, Geist Mono for labels and numbers.
+- One accent colour (signal orange) used only for primary actions and data highlights.
+- Light, dark and system themes; the choice is stored per visitor and applied before first paint.
+- Scroll reveals use CSS scroll-driven animations; Motion handles menus, tabs and form transitions. Both respect `prefers-reduced-motion`.
