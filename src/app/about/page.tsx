@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: "About" };
 const pillars = [
   { icon: Compass, title: "Mission", text: "Give every growing business access to world-class digital products and marketing, without enterprise price tags." },
   { icon: Eye, title: "Vision", text: "To be the most trusted technology partner for ambitious companies across India and beyond." },
-  { icon: Heart, title: "Values", text: "Quality over shortcuts, radical transparency, and measuring our success by the success of our clients." },
+  { icon: Heart, title: "Values", text: "Quality over shortcuts, radical transparency, and measuring our success by the success of the businesses we work with." },
 ];
 
 export default function AboutPage() {
@@ -20,8 +20,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="A young team with a decade of experience"
-        highlight={["decade"]}
+        title="A new studio built for what comes next"
+        highlight={["next"]}
         text="We are designers, engineers and marketers who love turning complex problems into simple, beautiful products. Curious by nature, obsessed with results."
       />
       <Intro />

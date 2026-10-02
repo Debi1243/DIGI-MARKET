@@ -11,7 +11,7 @@ import { stats } from "@/lib/data";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const copy =
-  "For more than a decade we have partnered with startups, hospitals, schools, hotels and retailers to turn bold ideas into software and campaigns that people love to use. One team. Every channel. Measurable growth.";
+  "सृजEX is a new digital studio, founded to help startups, hospitals, schools, hotels and retailers turn bold ideas into software and campaigns that people love to use. One team. Every channel. Measurable growth.";
 
 export default function Intro() {
   const ref = useRef<HTMLDivElement>(null);

@@ -6,11 +6,9 @@ import Reveal from "../ui/Reveal";
 import SectionHeading from "../ui/SectionHeading";
 
 const milestones = [
-  { year: "2014", title: "Lift-off", text: "Started as a two-person web studio building sites for local businesses." },
-  { year: "2016", title: "Software suite", text: "Launched our billing and school management products, now used by thousands." },
-  { year: "2019", title: "Growth marketing", text: "Added SEO, social and paid media to help clients get found and convert." },
-  { year: "2022", title: "Mobile first", text: "Opened our app studio and shipped our 50th Flutter app." },
-  { year: "2026", title: "AI-assisted delivery", text: "AI-powered audits and automation help us ship faster without cutting corners." },
+  { year: "2026", title: "सृजEX is founded", text: "A small team of designers, engineers and marketers comes together under one name." },
+  { year: "Now", title: "Founding clients", text: "We're taking on our first projects with launch pricing and the founders on every call." },
+  { year: "Next", title: "Growing with you", text: "Every project we ship becomes a case study, and every client helps shape what we build next." },
 ];
 
 export default function Timeline() {
@@ -21,7 +19,7 @@ export default function Timeline() {
   return (
     <section className="py-24">
       <div className="mx-auto max-w-5xl px-6">
-        <SectionHeading eyebrow="Our journey" title="A decade of shipping" highlight={["shipping"]} align="center" />
+        <SectionHeading eyebrow="Our story" title="Just getting started" highlight={["started"]} align="center" />
         <div ref={ref} className="relative mt-20">
           <div className="absolute left-4 top-0 h-full w-px bg-white/10 md:left-1/2" />
           <motion.div style={{ scaleY }} className="absolute left-4 top-0 h-full w-px origin-top bg-gradient-to-b from-lime via-cyan to-violet md:left-1/2" />

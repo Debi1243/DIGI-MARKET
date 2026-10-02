@@ -26,7 +26,7 @@ export default function SplitText({ text, className, delay = 0, stagger = 0.06, 
       aria-label={text}
     >
       {words.map((w, i) => (
-        <span key={i} className="-mr-[0.12em] inline-block overflow-hidden pb-[0.12em] pr-[0.12em] align-top" aria-hidden>
+        <span key={i} className="-mr-[0.2em] inline-block overflow-hidden pb-[0.12em] pr-[0.2em] align-top" aria-hidden>
           <motion.span
             className={clsx("inline-block", highlight.includes(w.replace(/[.,!?]/g, "")) && "text-gradient italic")}
             variants={{
