@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { brand, services } from "@/lib/data";
 import Logo from "./ui/Logo";
+import BrandLogo from "./ui/BrandLogo";
 import Button from "./ui/Button";
 
 export default function Footer() {
@@ -43,8 +44,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="relative select-none overflow-hidden">
-        <p className="outline-text whitespace-nowrap text-center font-display text-[22vw] font-bold leading-[0.8] tracking-tighter">{brand.name}</p>
+      <div className="relative flex select-none justify-center overflow-hidden px-6 opacity-[0.12]">
+        <BrandLogo className="h-[18vw] max-h-72" />
       </div>
       <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-3 px-6 py-8 text-xs text-muted md:flex-row">
         <p>© {new Date().getFullYear()} {brand.full}. All rights reserved.</p>

@@ -35,8 +35,8 @@ html.light {
   --color-violet: #7c5cff;
   --color-cyan: #2de2e6;
   --color-lime: #c6ff3d;
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-grotesk);
+  --font-sans: var(--font-inter), var(--font-devanagari);
+  --font-display: var(--font-grotesk), var(--font-devanagari);
   --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
   --animate-spin-slow: spin 24s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -114,6 +114,11 @@ html.light { --grad-1: #65a30d; --grad-2: #0891b2; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Brand logo: brighter variant on dark backgrounds, original on light. */
+.logo-on-light { display: none; }
+html.light .logo-on-light { display: block; }
+html.light .logo-on-dark { display: none; }
 
 html.light .glass { background-color: color-mix(in srgb, var(--surface) 70%, transparent); }
 

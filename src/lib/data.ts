@@ -18,10 +18,11 @@ import {
 } from "lucide-react";
 
 export const brand = {
-  name: "Orbitra",
-  full: "Orbitra Digital Labs",
+  name: "सृजEX",
+  latin: "Srujex",
+  full: "सृजEX",
   tagline: "We design, build and grow digital products.",
-  email: "hello@orbitra.studio",
+  email: "hello@srujex.com",
   phone: "+91 98765 43210",
   address: "Tech Park, Bhubaneswar, Odisha, India",
 };
@@ -442,7 +443,7 @@ export const stats = [
 export const testimonials = [
   {
     quote:
-      "Orbitra rebuilt our website and ran our SEO. Organic enquiries tripled within six months and the site finally feels like us.",
+      "सृजEX rebuilt our website and ran our SEO. Organic enquiries tripled within six months and the site finally feels like us.",
     name: "Ananya Mishra",
     role: "Founder, Bloom Organics",
   },

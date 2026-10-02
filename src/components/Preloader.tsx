@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { brand } from "@/lib/data";
+import BrandLogo from "./ui/BrandLogo";
 
 export default function Preloader() {
   const [count, setCount] = useState(0);
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("orbitra-loaded")) {
+    if (sessionStorage.getItem("srujex-loaded")) {
       setDone(true);
       return;
     }
@@ -21,7 +21,7 @@ export default function Preloader() {
         window.clearInterval(id);
         window.setTimeout(() => {
           setDone(true);
-          try { sessionStorage.setItem("orbitra-loaded", "1"); } catch {}
+          try { sessionStorage.setItem("srujex-loaded", "1"); } catch {}
         }, 350);
       }
     }, 70);
@@ -37,13 +37,8 @@ export default function Preloader() {
           initial={{ clipPath: "inset(0 0 0% 0)" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-display text-5xl font-bold tracking-tight md:text-7xl"
-          >
-            {brand.name}
-            <span className="text-accent">.</span>
+          <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}>
+            <BrandLogo priority className="h-20 md:h-28" />
           </motion.div>
           <div className="mt-8 h-px w-56 overflow-hidden bg-white/10">
             <motion.div className="h-full bg-lime" animate={{ width: `${count}%` }} />
