@@ -50,6 +50,14 @@ export default function ParticleField({ className }: { className?: string }) {
       mouse.y = e.clientY - rect.top;
       mouse.active = mouse.y >= 0 && mouse.y <= rect.height;
     };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = t.clientX - rect.left;
+      mouse.y = t.clientY - rect.top;
+      mouse.active = mouse.y >= 0 && mouse.y <= rect.height;
+    };
     const onLeave = () => {
       mouse.active = false;
       mouse.x = mouse.y = -9999;
@@ -133,6 +141,9 @@ export default function ParticleField({ className }: { className?: string }) {
     ro.observe(host);
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerleave", onLeave);
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    window.addEventListener("touchend", onLeave);
 
     return () => {
       cancelAnimationFrame(raf);
@@ -141,6 +152,9 @@ export default function ParticleField({ className }: { className?: string }) {
       themeObserver.disconnect();
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("touchend", onLeave);
     };
   }, []);
 

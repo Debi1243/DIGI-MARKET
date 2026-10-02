@@ -42,7 +42,7 @@ function useLayer(sx: MotionValue<number>, sy: MotionValue<number>, depth: numbe
 
 // A 3D scene that tilts toward the cursor. Each layer sits at a different
 // depth (translateZ), so nearer cards swing further than the orb behind them.
-function HeroScene({ sx, sy, scale }: { sx: MotionValue<number>; sy: MotionValue<number>; scale: MotionValue<number> }) {
+function HeroScene({ sx, sy, scale, className }: { sx: MotionValue<number>; sy: MotionValue<number>; scale: MotionValue<number>; className: string }) {
   const rotateY = useTransform(sx, (v) => v * 34);
   const rotateX = useTransform(sy, (v) => v * -30);
   const x = useTransform(sx, (v) => v * 24);
@@ -50,7 +50,7 @@ function HeroScene({ sx, sy, scale }: { sx: MotionValue<number>; sy: MotionValue
   const z = (d: number) => ({ transform: `translateZ(${d}px)` });
 
   return (
-    <div className="pointer-events-none absolute right-[-6rem] top-1/2 hidden h-[44rem] w-[44rem] -translate-y-1/2 [perspective:1100px] lg:block xl:right-6">
+    <div className={`pointer-events-none h-[44rem] w-[44rem] [perspective:1100px] ${className}`}>
       <motion.div
         style={{ rotateX, rotateY, x, y, scale, transformStyle: "preserve-3d" }}
         initial={{ opacity: 0 }}
@@ -165,6 +165,46 @@ export default function Hero() {
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 60, damping: 20 });
   const sy = useSpring(my, { stiffness: 60, damping: 20 });
+  const unit = useMotionValue(1);
+  // The scroll fade/drift on the text only runs on desktop; on phones the scene
+  // sits right under the text and the drift would push the text into it.
+  const [desktop, setDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  const lastPointer = useRef(0);
+
+  // Without a mouse, tilt the scene with the phone's gyroscope, and when the
+  // user isn't touching anything let it sway on its own.
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let lastTilt = 0;
+    const onTilt = (e: DeviceOrientationEvent) => {
+      if (e.gamma == null || e.beta == null) return;
+      lastTilt = performance.now();
+      mx.set(Math.max(-0.5, Math.min(0.5, e.gamma / 50)));
+      my.set(Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 60)));
+    };
+    window.addEventListener("deviceorientation", onTilt);
+    let raf = 0;
+    const sway = (t: number) => {
+      raf = requestAnimationFrame(sway);
+      const now = performance.now();
+      if (now - lastTilt < 1500 || now - lastPointer.current < 2500) return;
+      mx.set(Math.sin(t / 1800) * 0.4);
+      my.set(Math.cos(t / 2500) * 0.3);
+    };
+    raf = requestAnimationFrame(sway);
+    return () => {
+      window.removeEventListener("deviceorientation", onTilt);
+      cancelAnimationFrame(raf);
+    };
+  }, [mx, my]);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yText = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
@@ -182,8 +222,9 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100svh] items-center overflow-hidden pt-32 pb-20"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-32 pb-20 lg:flex-row lg:items-center"
       onPointerMove={(e) => {
+        lastPointer.current = performance.now();
         mx.set(e.clientX / window.innerWidth - 0.5);
         my.set(e.clientY / window.innerHeight - 0.5);
         const r = e.currentTarget.getBoundingClientRect();
@@ -201,9 +242,14 @@ export default function Hero() {
       <motion.div style={l2} className="pointer-events-none absolute -left-40 top-20 h-[32rem] w-[32rem] rounded-full bg-violet/30 blur-[140px]" />
       <motion.div style={l1} className="pointer-events-none absolute -right-20 bottom-0 h-[28rem] w-[28rem] rounded-full bg-cyan/20 blur-[140px]" />
 
-      <HeroScene sx={sx} sy={sy} scale={scaleOrb} />
+      <HeroScene
+        sx={sx}
+        sy={sy}
+        scale={scaleOrb}
+        className="absolute right-[-6rem] top-1/2 hidden -translate-y-1/2 lg:block xl:right-6"
+      />
 
-      <motion.div style={{ y: yText, opacity }} className="relative mx-auto w-full max-w-7xl px-6">
+      <motion.div style={desktop ? { y: yText, opacity } : undefined} className="relative mx-auto w-full max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -273,13 +319,24 @@ export default function Hero() {
             <p className="text-muted">Launch pricing for our first clients</p>
           </div>
         </motion.div>
+
       </motion.div>
+
+      {/* Phones and tablets: the same scene, scaled down and driven by touch, tilt or an idle sway. */}
+      <div className="relative mx-auto mt-6 h-[24rem] w-full max-w-[34rem] sm:h-[30rem] lg:hidden">
+        <HeroScene
+          sx={sx}
+          sy={sy}
+          scale={unit}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 scale-[0.54] sm:scale-[0.68]"
+        />
+      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2 }}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted md:flex"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[0.3em] text-muted lg:flex"
       >
         Scroll
         <span className="relative h-10 w-px overflow-hidden bg-white/10">
