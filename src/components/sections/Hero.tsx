@@ -137,7 +137,7 @@ export default function Hero() {
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <Button href="/contact">Start your project</Button>
-          <Button href="/work" variant="ghost">See our work</Button>
+          <Button href="/work" variant="ghost">See what we build</Button>
         </motion.div>
 
         <motion.div
