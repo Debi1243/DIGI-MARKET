@@ -19,7 +19,7 @@ function Field({ label, name, type = "text", textarea, error }: { label: string;
       ) : (
         <input name={name} type={type} placeholder={label} className={cls} />
       )}
-      <span className="pointer-events-none absolute left-0 top-0 text-xs text-muted transition-all peer-placeholder-shown:top-6 peer-placeholder-shown:text-lg peer-focus:top-0 peer-focus:text-xs peer-focus:text-lime">
+      <span className="pointer-events-none absolute left-0 top-0 text-xs text-muted transition-all peer-placeholder-shown:top-6 peer-placeholder-shown:text-lg peer-focus:top-0 peer-focus:text-xs peer-focus:text-accent">
         {label}
       </span>
       <AnimatePresence>
@@ -95,7 +95,7 @@ export default function ContactForm() {
               <p className="text-sm text-muted">Budget</p>
               <div className="relative mt-4 grid grid-cols-2 gap-1 rounded-2xl bg-white/5 p-1 sm:grid-cols-4">
                 {budgets.map((b) => (
-                  <button type="button" key={b} onClick={() => setBudget(b)} className={clsx("relative rounded-xl px-3 py-3 text-sm transition-colors", budget === b ? "text-ink" : "text-paper/70")}>
+                  <button type="button" key={b} onClick={() => setBudget(b)} className={clsx("relative rounded-xl px-3 py-3 text-sm transition-colors", budget === b ? "text-base" : "text-paper/70")}>
                     {budget === b && <motion.span layoutId="budget" className="absolute inset-0 rounded-xl bg-paper" transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
                     <span className="relative">{b}</span>
                   </button>
@@ -108,7 +108,7 @@ export default function ContactForm() {
               disabled={state === "sending"}
               className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-lime px-8 py-5 font-semibold text-ink disabled:opacity-70 md:w-auto"
             >
-              <span className="absolute inset-0 translate-y-full rounded-full bg-white transition-transform duration-500 group-hover:translate-y-0" />
+              <span className="absolute inset-0 translate-y-full rounded-full bg-[#fff] transition-transform duration-500 group-hover:translate-y-0" />
               <span className="relative">{state === "sending" ? "Sending…" : "Send message"}</span>
               <motion.span className="relative" animate={state === "sending" ? { x: [0, 40], opacity: [1, 0] } : {}} transition={{ repeat: Infinity, duration: 0.8 }}>
                 <Send className="h-4 w-4" />

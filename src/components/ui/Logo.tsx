@@ -10,7 +10,7 @@ export default function Logo() {
       </span>
       <span className="font-display text-xl font-bold tracking-tight">
         {brand.name}
-        <span className="text-lime">.</span>
+        <span className="text-accent">.</span>
       </span>
     </Link>
   );

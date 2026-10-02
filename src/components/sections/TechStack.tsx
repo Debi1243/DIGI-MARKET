@@ -9,7 +9,7 @@ export default function TechStack() {
       {[tech.slice(0, half), tech.slice(half)].map((row, r) => (
         <Marquee key={r} duration={28 + r * 6} reverse={r === 1}>
           {row.map((t) => (
-            <span key={t} className="glass mx-2 rounded-full px-6 py-3 text-sm font-medium text-paper/80 transition-colors hover:text-lime">
+            <span key={t} className="glass mx-2 rounded-full px-6 py-3 text-sm font-medium text-paper/80 transition-colors hover:text-accent">
               {t}
             </span>
           ))}

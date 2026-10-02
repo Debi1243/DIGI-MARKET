@@ -22,7 +22,7 @@ export default function Testimonials() {
       <div className="relative mx-auto max-w-5xl px-6 text-center">
         <SectionHeading eyebrow="Client love" title="Don't take our word for it" align="center" highlight={["word"]} />
         <div className="relative mt-16 min-h-[18rem] md:min-h-[16rem]">
-          <Quote className="mx-auto h-12 w-12 text-lime" />
+          <Quote className="mx-auto h-12 w-12 text-accent" />
           <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={i}
@@ -39,7 +39,7 @@ export default function Testimonials() {
           </AnimatePresence>
         </div>
         <div className="mt-10 flex items-center justify-center gap-6">
-          <button onClick={() => go(-1)} aria-label="Previous" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white hover:text-ink">
+          <button onClick={() => go(-1)} aria-label="Previous" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:border-lime hover:bg-lime hover:text-ink">
             <ArrowLeft className="h-5 w-5" />
           </button>
           <div className="flex gap-2">
@@ -53,7 +53,7 @@ export default function Testimonials() {
               </button>
             ))}
           </div>
-          <button onClick={() => go(1)} aria-label="Next" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:bg-white hover:text-ink">
+          <button onClick={() => go(1)} aria-label="Next" className="grid h-12 w-12 place-items-center rounded-full border border-white/15 transition-colors hover:border-lime hover:bg-lime hover:text-ink">
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>

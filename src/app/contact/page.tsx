@@ -28,7 +28,7 @@ export default function ContactPage() {
             {info.map((i, k) => (
               <Reveal key={i.label} delay={k * 0.1}>
                 <a href={i.href} className="group flex items-center gap-5 rounded-2xl border border-white/10 p-6 transition-colors hover:border-lime/50">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-lime transition-all duration-500 group-hover:scale-110 group-hover:bg-lime group-hover:text-ink">
+                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-accent transition-all duration-500 group-hover:scale-110 group-hover:bg-lime group-hover:text-ink">
                     <i.icon className="h-6 w-6" />
                   </span>
                   <span>

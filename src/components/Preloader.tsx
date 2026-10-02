@@ -32,7 +32,7 @@ export default function Preloader() {
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-ink"
+          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-base"
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           initial={{ clipPath: "inset(0 0 0% 0)" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
@@ -43,7 +43,7 @@ export default function Preloader() {
             className="font-display text-5xl font-bold tracking-tight md:text-7xl"
           >
             {brand.name}
-            <span className="text-lime">.</span>
+            <span className="text-accent">.</span>
           </motion.div>
           <div className="mt-8 h-px w-56 overflow-hidden bg-white/10">
             <motion.div className="h-full bg-lime" animate={{ width: `${count}%` }} />

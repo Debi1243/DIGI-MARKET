@@ -31,7 +31,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
         <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex items-center gap-2 text-sm text-muted">
-              <Link href="/services" className="hover:text-lime">Services</Link>
+              <Link href="/services" className="hover:text-accent">Services</Link>
               <span>/</span>
               <span className="text-paper">{s.category}</span>
             </motion.nav>
@@ -62,7 +62,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
         <div className="relative mx-auto mt-20 max-w-7xl px-6">
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-white/5 bg-white/5 sm:grid-cols-3">
           {s.stats.map((st, i) => (
-            <Reveal key={st.label} delay={i * 0.1} className="bg-ink p-8">
+            <Reveal key={st.label} delay={i * 0.1} className="bg-base p-8">
               <Counter value={st.value} suffix={st.suffix} className="font-display text-5xl font-semibold tracking-tight text-gradient" />
               <p className="mt-2 text-sm text-muted">{st.label}</p>
             </Reveal>
@@ -80,7 +80,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
               <ul className="mt-4 space-y-3">
                 {s.deliverables.map((d) => (
                   <li key={d} className="flex items-center gap-3">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-lime/15 text-lime"><Check className="h-3.5 w-3.5" /></span>
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-lime/15 text-accent"><Check className="h-3.5 w-3.5" /></span>
                     {d}
                   </li>
                 ))}
@@ -93,7 +93,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
                 <TiltCard max={8}>
                   <div className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink-2 p-8">
                     <div className="spotlight pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100" />
-                    <span className="relative font-mono text-sm text-lime">0{i + 1}</span>
+                    <span className="relative font-mono text-sm text-accent">0{i + 1}</span>
                     <h3 className="relative mt-10 font-display text-2xl font-semibold tracking-tight">{f.title}</h3>
                     <p className="relative mt-3 leading-relaxed text-muted">{f.text}</p>
                   </div>
@@ -115,7 +115,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
                   <Link href={`/services/${r.slug}`} className="group flex items-center gap-4 rounded-2xl border border-white/10 p-5 transition-colors hover:border-lime/50 hover:bg-white/[0.03]">
                     <span className={clsx("grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-ink", r.accent)}><RIcon className="h-5 w-5" /></span>
                     <span className="flex-1 font-medium">{r.title}</span>
-                    <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:rotate-45 group-hover:text-lime" />
+                    <ArrowUpRight className="h-5 w-5 text-muted transition-all group-hover:rotate-45 group-hover:text-accent" />
                   </Link>
                 </Reveal>
               );

@@ -1,11 +1,37 @@
 @import "tailwindcss";
 
+/* Theme tokens. Dark is the default; `html.light` switches the palette. */
+:root {
+  --bg: #07070c;
+  --surface: #0e0e17;
+  --surface-2: #161623;
+  --fg: #f4f3ff;
+  --muted: #9b99b5;
+  --overlay: #ffffff;
+  --accent-fg: #c6ff3d;
+  color-scheme: dark;
+}
+html.light {
+  --bg: #f6f6fa;
+  --surface: #ffffff;
+  --surface-2: #ececf3;
+  --fg: #0b0b14;
+  --muted: #5d5b74;
+  --overlay: #0b0b14;
+  --accent-fg: #4d7c0f;
+  color-scheme: light;
+}
+
 @theme inline {
+  /* `ink` stays dark in both themes: it is the text colour on lime/gradient accents. */
   --color-ink: #07070c;
-  --color-ink-2: #0e0e17;
-  --color-ink-3: #161623;
-  --color-paper: #f4f3ff;
-  --color-muted: #9b99b5;
+  --color-base: var(--bg);
+  --color-ink-2: var(--surface);
+  --color-ink-3: var(--surface-2);
+  --color-paper: var(--fg);
+  --color-muted: var(--muted);
+  --color-white: var(--overlay);
+  --color-accent: var(--accent-fg);
   --color-violet: #7c5cff;
   --color-cyan: #2de2e6;
   --color-lime: #c6ff3d;
@@ -30,8 +56,9 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 
 body {
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--bg);
+  color: var(--fg);
+  transition: background-color 0.4s ease, color 0.4s ease;
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -39,16 +66,18 @@ body {
 ::selection { background: var(--color-lime); color: var(--color-ink); }
 
 .text-gradient {
-  background: linear-gradient(100deg, #c6ff3d 0%, #2de2e6 45%, #7c5cff 100%);
+  background: linear-gradient(100deg, var(--grad-1, #c6ff3d) 0%, var(--grad-2, #2de2e6) 45%, #7c5cff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+html.light { --grad-1: #65a30d; --grad-2: #0891b2; }
+
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--overlay) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--overlay) 6%, transparent) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
@@ -64,8 +93,8 @@ body {
 }
 
 .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--overlay) 6%, transparent), color-mix(in srgb, var(--overlay) 2%, transparent));
+  border: 1px solid color-mix(in srgb, var(--overlay) 9%, transparent);
   backdrop-filter: blur(14px);
 }
 
@@ -74,7 +103,7 @@ body {
 }
 
 .outline-text {
-  -webkit-text-stroke: 1px rgba(244,243,255,0.25);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 25%, transparent);
   color: transparent;
 }
 
@@ -85,3 +114,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+html.light .glass { background-color: color-mix(in srgb, var(--surface) 70%, transparent); }
+
+/* Circular reveal when switching themes (View Transitions API). */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { z-index: 1; }
