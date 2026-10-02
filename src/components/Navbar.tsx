@@ -57,16 +57,56 @@ export default function Navbar() {
           )}
         >
           <Logo />
-          <ul className="hidden items-center gap-1 md:flex">
-            {links.map((l) => {
+          <ul className="glass hidden items-center gap-1 rounded-full p-1.5 lg:flex">
+            {links.map((l, i) => {
               const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
               return (
                 <li key={l.href} onMouseEnter={() => setMega(l.href === "/services")}>
-                  <Link href={l.href} className="relative block px-4 py-2 text-sm text-paper/80 transition-colors hover:text-paper">
-                    {active && (
-                      <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-white/10" transition={{ type: "spring", stiffness: 350, damping: 30 }} />
+                  <Link
+                    href={l.href}
+                    className={clsx(
+                      "group relative flex items-center gap-1.5 rounded-full px-4 py-2 font-display text-[15px] font-bold tracking-tight transition-colors",
+                      active ? "text-ink" : "text-paper/90 hover:text-paper",
                     )}
-                    <span className="relative">{l.label}</span>
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-lime via-cyan to-violet shadow-[0_0_24px_-4px_rgba(45,226,230,0.7)]"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span className={clsx("relative font-mono text-[10px] font-medium", active ? "text-ink/60" : "text-accent")}>
+                      0{i + 1}
+                    </span>
+                    {/* Letters roll up on hover, replaced by a gradient copy. */}
+                    <span className="relative block overflow-hidden" aria-label={l.label}>
+                      <span className="flex" aria-hidden>
+                        {l.label.split("").map((ch, k) => (
+                          <span
+                            key={k}
+                            className="inline-block transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] group-hover:-translate-y-full"
+                            style={{ transitionDelay: `${k * 25}ms` }}
+                          >
+                            {ch}
+                          </span>
+                        ))}
+                      </span>
+                      <span className="absolute inset-0 flex" aria-hidden>
+                        {l.label.split("").map((ch, k) => (
+                          <span
+                            key={k}
+                            className={clsx(
+                              "inline-block translate-y-full transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] group-hover:translate-y-0",
+                              !active && "text-accent",
+                            )}
+                            style={{ transitionDelay: `${k * 25}ms` }}
+                          >
+                            {ch}
+                          </span>
+                        ))}
+                      </span>
+                    </span>
                   </Link>
                 </li>
               );
@@ -74,14 +114,14 @@ export default function Navbar() {
           </ul>
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <Magnetic className="hidden md:inline-block">
+            <Magnetic className="hidden lg:inline-block">
               <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-ink transition-transform hover:scale-105">
                 Start a project <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Magnetic>
             <button
               onClick={() => setOpen((o) => !o)}
-              className="relative grid h-11 w-11 place-items-center rounded-full bg-white/10 md:hidden"
+              className="relative grid h-11 w-11 place-items-center rounded-full bg-white/10 lg:hidden"
               aria-label="Toggle menu"
               aria-expanded={open}
             >
@@ -98,7 +138,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="glass mx-auto mt-3 hidden max-w-7xl grid-cols-3 gap-2 rounded-3xl p-4 shadow-2xl shadow-black/50 md:grid"
+              className="glass mx-auto mt-3 hidden max-w-7xl grid-cols-3 gap-2 rounded-3xl p-4 shadow-2xl shadow-black/50 lg:grid"
             >
               {services.map((s, i) => {
                 const Icon = s.icon;
@@ -124,7 +164,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-base px-6 pb-10 pt-28 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-base px-6 pb-10 pt-28 lg:hidden"
             initial={{ clipPath: "circle(0% at calc(100% - 44px) 44px)" }}
             animate={{ clipPath: "circle(150% at calc(100% - 44px) 44px)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 44px) 44px)" }}
@@ -138,7 +178,14 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.25 + i * 0.07 }}
                 >
-                  <Link href={l.href} className="font-display text-5xl font-semibold tracking-tight">
+                  <Link
+                    href={l.href}
+                    className={clsx(
+                      "flex items-baseline gap-3 font-display text-5xl font-bold tracking-tight",
+                      (l.href === "/" ? pathname === "/" : pathname.startsWith(l.href)) && "text-gradient",
+                    )}
+                  >
+                    <span className="font-mono text-sm font-medium text-accent">0{i + 1}</span>
                     {l.label}
                   </Link>
                 </motion.li>
