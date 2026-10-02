@@ -27,9 +27,9 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
       className={clsx("group", i % 2 === 1 && "md:mt-32")}
       data-cursor="Explore"
     >
-      <div className={clsx("relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-gradient-to-br p-8", p.gradient)}>
+      <div className={clsx("relative flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] bg-gradient-to-br p-5 pt-14 sm:aspect-[4/3] sm:p-8 sm:pt-14", p.gradient)}>
         <div className="absolute inset-0 bg-ink/10 transition-colors duration-700 group-hover:bg-transparent" />
-        <motion.div style={{ y, rotate }} className="relative mx-auto mt-4 w-[88%] transition-transform duration-700 group-hover:scale-105">
+        <motion.div style={{ y, rotate }} className="relative w-full transition-transform duration-700 sm:w-[88%] group-hover:scale-105">
           <ProjectMockup kind={p.kind} />
         </motion.div>
         <span className="absolute left-6 top-6 rounded-full bg-ink/70 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[#fff] backdrop-blur">
@@ -39,7 +39,7 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
           <ArrowUpRight className="h-5 w-5" />
         </span>
       </div>
-      <div className="mt-6 flex items-start justify-between gap-4">
+      <div className="mt-6 flex flex-col-reverse items-start justify-between gap-3 sm:flex-row sm:gap-4">
         <div>
           <p className="text-sm font-semibold text-accent">
             {p.client} <span className="font-normal text-muted">· {p.location}</span>
