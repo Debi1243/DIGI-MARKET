@@ -58,14 +58,14 @@ export default function Navbar() {
         >
           <Logo />
           <ul className="glass hidden items-center gap-1 rounded-full p-1.5 lg:flex">
-            {links.map((l, i) => {
+            {links.map((l) => {
               const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
               return (
                 <li key={l.href} onMouseEnter={() => setMega(l.href === "/services")}>
                   <Link
                     href={l.href}
                     className={clsx(
-                      "group relative flex items-center gap-1.5 rounded-full px-4 py-2 font-display text-[15px] font-bold tracking-tight transition-colors",
+                      "group relative flex items-center rounded-full px-4 py-2 font-display text-[15px] font-bold tracking-tight transition-colors",
                       active ? "text-ink" : "text-paper/90 hover:text-paper",
                     )}
                   >
@@ -76,9 +76,6 @@ export default function Navbar() {
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
-                    <span className={clsx("relative font-mono text-[10px] font-medium", active ? "text-ink/60" : "text-accent")}>
-                      0{i + 1}
-                    </span>
                     {/* Letters roll up on hover, replaced by a gradient copy. */}
                     <span className="relative block overflow-hidden" aria-label={l.label}>
                       <span className="flex" aria-hidden>
@@ -185,7 +182,6 @@ export default function Navbar() {
                       (l.href === "/" ? pathname === "/" : pathname.startsWith(l.href)) && "text-gradient",
                     )}
                   >
-                    <span className="font-mono text-sm font-medium text-accent">0{i + 1}</span>
                     {l.label}
                   </Link>
                 </motion.li>
