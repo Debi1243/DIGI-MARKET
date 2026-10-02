@@ -43,6 +43,13 @@ export type Service = {
   faqs: { q: string; a: string }[];
 };
 
+// What every engagement includes. सृजEX is a new company, so we show promises, not track-record numbers.
+const commitments = [
+  { value: 48, suffix: "h", label: "Proposal turnaround" },
+  { value: 60, suffix: " days", label: "Free support after launch" },
+  { value: 100, suffix: "%", label: "You own the code & assets" },
+];
+
 const commonFaq = (name: string) => [
   {
     q: `How long does a typical ${name} engagement take?`,
@@ -75,11 +82,7 @@ export const services: Service[] = [
       { title: "Core Web Vitals tuned", text: "Optimised images, code splitting and caching for top Lighthouse scores." },
     ],
     deliverables: ["Sitemap & wireframes", "Design system", "Responsive build", "CMS training", "Analytics setup"],
-    stats: [
-      { value: 240, suffix: "+", label: "Sites launched" },
-      { value: 98, suffix: "", label: "Avg. Lighthouse" },
-      { value: 2.4, suffix: "x", label: "Lead uplift" },
-    ],
+    stats: commitments,
     faqs: commonFaq("website"),
   },
   {
@@ -98,11 +101,7 @@ export const services: Service[] = [
       { title: "Performance ads", text: "Google, Meta and LinkedIn campaigns optimised to cost per acquisition." },
     ],
     deliverables: ["SEO audit", "Keyword roadmap", "Monthly content", "Ad campaigns", "Live dashboard"],
-    stats: [
-      { value: 312, suffix: "%", label: "Avg. organic growth" },
-      { value: 4.8, suffix: "x", label: "Return on ad spend" },
-      { value: 1200, suffix: "+", label: "Page-one keywords" },
-    ],
+    stats: commitments,
     faqs: commonFaq("marketing"),
   },
   {
@@ -121,11 +120,7 @@ export const services: Service[] = [
       { title: "Store launch", text: "App Store and Play Store submission, ASO and release management." },
     ],
     deliverables: ["Clickable prototype", "iOS & Android apps", "Admin panel", "API docs", "Store listing"],
-    stats: [
-      { value: 85, suffix: "+", label: "Apps shipped" },
-      { value: 4.7, suffix: "★", label: "Avg. store rating" },
-      { value: 2, suffix: "M+", label: "Downloads" },
-    ],
+    stats: commitments,
     faqs: commonFaq("app"),
   },
   {
@@ -144,11 +139,7 @@ export const services: Service[] = [
       { title: "Delivery analytics", text: "Live delivery, click and reply tracking per campaign." },
     ],
     deliverables: ["Account setup", "DLT registration", "API keys", "Campaign templates", "Reports"],
-    stats: [
-      { value: 99, suffix: "%", label: "Delivery rate" },
-      { value: 50, suffix: "M+", label: "Messages / month" },
-      { value: 3, suffix: "s", label: "Avg. OTP latency" },
-    ],
+    stats: commitments,
     faqs: commonFaq("messaging"),
   },
   {
@@ -167,11 +158,7 @@ export const services: Service[] = [
       { title: "Multi-branch", text: "Central dashboard for every outlet with role-based access." },
     ],
     deliverables: ["Installation", "Data migration", "Staff training", "Custom reports", "Cloud backup"],
-    stats: [
-      { value: 1800, suffix: "+", label: "Businesses billing" },
-      { value: 70, suffix: "%", label: "Faster checkout" },
-      { value: 24, suffix: "/7", label: "Support" },
-    ],
+    stats: commitments,
     faqs: commonFaq("billing"),
   },
   {
@@ -190,11 +177,7 @@ export const services: Service[] = [
       { title: "Insightful reports", text: "Team performance, source ROI and conversion funnels." },
     ],
     deliverables: ["Pipeline setup", "Integrations", "Automation rules", "Mobile app", "Training"],
-    stats: [
-      { value: 35, suffix: "%", label: "More deals closed" },
-      { value: 6, suffix: "h", label: "Saved per rep / week" },
-      { value: 400, suffix: "+", label: "Teams onboarded" },
-    ],
+    stats: commitments,
     faqs: commonFaq("CRM"),
   },
   {
@@ -213,11 +196,7 @@ export const services: Service[] = [
       { title: "Bank integration", text: "Salary files ready for bulk transfer in one click." },
     ],
     deliverables: ["Policy setup", "Device integration", "Employee app", "Compliance reports", "Training"],
-    stats: [
-      { value: 90, suffix: "%", label: "Less payroll time" },
-      { value: 25, suffix: "k+", label: "Employees paid" },
-      { value: 0, suffix: "", label: "Missed deadlines" },
-    ],
+    stats: commitments,
     faqs: commonFaq("payroll"),
   },
   {
@@ -236,11 +215,7 @@ export const services: Service[] = [
       { title: "Secure by design", text: "Role-based access, audit trails and encrypted backups." },
     ],
     deliverables: ["Department mapping", "Implementation", "Staff training", "Data migration", "Support SLA"],
-    stats: [
-      { value: 60, suffix: "+", label: "Hospitals & clinics" },
-      { value: 40, suffix: "%", label: "Shorter wait times" },
-      { value: 99.9, suffix: "%", label: "Uptime" },
-    ],
+    stats: commitments,
     faqs: commonFaq("HMS"),
   },
   {
@@ -259,11 +234,7 @@ export const services: Service[] = [
       { title: "Restaurant POS", text: "KOTs, table management and room-posting." },
     ],
     deliverables: ["Property setup", "OTA connections", "POS hardware", "Training", "Reports"],
-    stats: [
-      { value: 120, suffix: "+", label: "Properties" },
-      { value: 28, suffix: "%", label: "More direct bookings" },
-      { value: 15, suffix: "min", label: "Night audit" },
-    ],
+    stats: commitments,
     faqs: commonFaq("hotel software"),
   },
   {
@@ -282,11 +253,7 @@ export const services: Service[] = [
       { title: "Parent app", text: "Attendance alerts, notices and progress in one app." },
     ],
     deliverables: ["Setup", "Data import", "Parent app", "Payment gateway", "Training"],
-    stats: [
-      { value: 150, suffix: "+", label: "Schools" },
-      { value: 95, suffix: "%", label: "On-time fees" },
-      { value: 80, suffix: "k+", label: "Parents connected" },
-    ],
+    stats: commitments,
     faqs: commonFaq("school software"),
   },
   {
@@ -305,11 +272,7 @@ export const services: Service[] = [
       { title: "Placement cell", text: "Company drives, applications and offer tracking." },
     ],
     deliverables: ["Module setup", "Data migration", "Student portal", "Faculty training", "Support"],
-    stats: [
-      { value: 45, suffix: "+", label: "Institutions" },
-      { value: 70, suffix: "%", label: "Less paperwork" },
-      { value: 200, suffix: "k+", label: "Student records" },
-    ],
+    stats: commitments,
     faqs: commonFaq("ERP"),
   },
   {
@@ -328,11 +291,7 @@ export const services: Service[] = [
       { title: "Member app", text: "Class bookings, payments and progress in your brand." },
     ],
     deliverables: ["Setup", "Device integration", "Member app", "Payment links", "Training"],
-    stats: [
-      { value: 30, suffix: "%", label: "Higher retention" },
-      { value: 90, suffix: "+", label: "Studios" },
-      { value: 0, suffix: "", label: "Missed renewals" },
-    ],
+    stats: commitments,
     faqs: commonFaq("gym software"),
   },
   {
@@ -351,11 +310,7 @@ export const services: Service[] = [
       { title: "Brand guidelines", text: "A clear rulebook with ready-to-use templates." },
     ],
     deliverables: ["Logo suite", "Colour & type", "Stationery", "Social kit", "Brand book"],
-    stats: [
-      { value: 500, suffix: "+", label: "Brands crafted" },
-      { value: 3, suffix: "", label: "Concepts per project" },
-      { value: 100, suffix: "%", label: "Ownership" },
-    ],
+    stats: commitments,
     faqs: commonFaq("branding"),
   },
   {
@@ -374,11 +329,7 @@ export const services: Service[] = [
       { title: "Team management", text: "Consistent branded cards for your whole company." },
     ],
     deliverables: ["Card design", "NFC card", "Profile page", "Analytics", "Team console"],
-    stats: [
-      { value: 10, suffix: "k+", label: "Cards shared" },
-      { value: 3, suffix: "x", label: "More saved contacts" },
-      { value: 1, suffix: " tap", label: "To connect" },
-    ],
+    stats: commitments,
     faqs: commonFaq("digital card"),
   },
   {
@@ -397,11 +348,7 @@ export const services: Service[] = [
       { title: "AMC support", text: "Preventive maintenance with guaranteed response times." },
     ],
     deliverables: ["Site survey", "Installation", "Configuration", "Documentation", "AMC"],
-    stats: [
-      { value: 2, suffix: "h", label: "Response SLA" },
-      { value: 350, suffix: "+", label: "Sites secured" },
-      { value: 99.9, suffix: "%", label: "Network uptime" },
-    ],
+    stats: commitments,
     faqs: commonFaq("IT infrastructure"),
   },
 ];
@@ -434,50 +381,23 @@ export const process = [
 ];
 
 export const stats = [
-  { value: 12, suffix: "+", label: "Years building" },
-  { value: 950, suffix: "+", label: "Projects delivered" },
-  { value: 40, suffix: "+", label: "Specialists" },
-  { value: 97, suffix: "%", label: "Client retention" },
+  { value: 2026, suffix: "", label: "Founded" },
+  { value: 15, suffix: "", label: "Services under one roof" },
+  { value: 48, suffix: "h", label: "Proposal turnaround" },
+  { value: 100, suffix: "%", label: "Code & asset ownership" },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "सृजEX rebuilt our website and ran our SEO. Organic enquiries tripled within six months and the site finally feels like us.",
-    name: "Ananya Mishra",
-    role: "Founder, Bloom Organics",
-  },
-  {
-    quote:
-      "The hospital software went live across three branches without a single day of downtime. Our front desk queue is half what it was.",
-    name: "Dr. Rakesh Patnaik",
-    role: "Director, CarePoint Hospitals",
-  },
-  {
-    quote:
-      "Their team thinks like product owners, not vendors. The app shipped on time and our ratings jumped to 4.8 stars.",
-    name: "Karan Mehta",
-    role: "CTO, Swiftcart",
-  },
-  {
-    quote:
-      "From GST billing to WhatsApp campaigns, one partner handles it all. Support replies in minutes, not days.",
-    name: "Priya Sahoo",
-    role: "Owner, Urban Threads",
-  },
-];
-
-export const clients = [
-  "Bloom Organics",
-  "CarePoint",
-  "Swiftcart",
-  "Urban Threads",
-  "Nimbus Hotels",
-  "EduSphere",
-  "IronCore Gyms",
-  "Kalinga Foods",
-  "Vertex Realty",
-  "Pulse Labs",
+export const industries = [
+  "Healthcare",
+  "Education",
+  "Hospitality",
+  "Retail",
+  "Fitness",
+  "Real Estate",
+  "Food & Beverage",
+  "Startups",
+  "Professional Services",
+  "Manufacturing",
 ];
 
 export const tech = [
@@ -497,55 +417,71 @@ export const tech = [
   "Shopify",
 ];
 
+// Example builds that show what we can make. These are concepts, not past client work.
 export const projects = [
   {
-    title: "Bloom Organics",
-    category: "Website + SEO",
-    result: "+312% organic traffic",
+    title: "Online Store",
+    category: "E-commerce website",
+    result: "Design · Build · SEO",
     gradient: "from-lime-300 via-emerald-400 to-teal-600",
     tags: ["Next.js", "Shopify", "SEO"],
   },
   {
-    title: "CarePoint HMS",
-    category: "Hospital Software",
-    result: "40% shorter wait times",
+    title: "Clinic & Hospital System",
+    category: "Hospital software",
+    result: "OPD · Billing · Pharmacy",
     gradient: "from-sky-300 via-blue-500 to-indigo-700",
-    tags: ["Laravel", "Vue", "AWS"],
+    tags: ["Laravel", "React", "AWS"],
   },
   {
-    title: "Swiftcart",
-    category: "Mobile App",
-    result: "4.8★ across 200k installs",
+    title: "Delivery App",
+    category: "Mobile app",
+    result: "iOS & Android",
     gradient: "from-fuchsia-400 via-violet-500 to-indigo-700",
     tags: ["Flutter", "Firebase"],
   },
   {
-    title: "Nimbus Hotels",
-    category: "Hotel Software + Ads",
-    result: "+28% direct bookings",
+    title: "Hotel Booking Suite",
+    category: "Hotel software + ads",
+    result: "Direct bookings",
     gradient: "from-amber-300 via-orange-500 to-rose-600",
     tags: ["PMS", "Google Ads"],
   },
   {
-    title: "EduSphere",
-    category: "School ERP",
-    result: "95% on-time fee collection",
+    title: "School ERP",
+    category: "Education software",
+    result: "Fees · Attendance · Parent app",
     gradient: "from-yellow-300 via-amber-400 to-orange-600",
     tags: ["React", "Node.js"],
   },
   {
-    title: "IronCore Gyms",
-    category: "Brand + Member App",
-    result: "30% higher retention",
+    title: "Gym Brand & App",
+    category: "Branding + member app",
+    result: "Logo · App · Launch",
     gradient: "from-rose-400 via-red-500 to-zinc-800",
     tags: ["Branding", "React Native"],
+  },
+];
+
+export const foundingPerks = [
+  {
+    title: "Founding-client pricing",
+    text: "Our first clients get launch pricing that stays locked in as we grow.",
+  },
+  {
+    title: "Direct access to the founders",
+    text: "No account managers in between. You talk to the people designing and building your product.",
+  },
+  {
+    title: "60 days of free support",
+    text: "Fixes, tweaks and guidance for two months after launch, included in every project.",
   },
 ];
 
 export const whyUs = [
   {
     title: "Senior, specialised team",
-    text: "Designers, engineers and marketers who have shipped hundreds of products work directly on your account.",
+    text: "Experienced designers, engineers and marketers work directly on your project, with no hand-offs to juniors.",
   },
   {
     title: "Transparent pricing",
@@ -557,6 +493,6 @@ export const whyUs = [
   },
   {
     title: "Partners after launch",
-    text: "We stick around. Care plans, growth sprints and a support line that answers fast.",
+    text: "We are building our name one client at a time, so we stay close: care plans, growth sprints and a support line that answers fast.",
   },
 ];

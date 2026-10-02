@@ -74,8 +74,8 @@ export default function WorkShowcase({ limit = 4 }: { limit?: number }) {
     <section className="relative py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <SectionHeading eyebrow="Selected work" title="Results we are proud to put our name on" highlight={["proud"]} />
-          <Button href="/work" variant="ghost">View all work</Button>
+          <SectionHeading eyebrow="What we build" title="Ideas we can bring to life for you" highlight={["life"]} />
+          <Button href="/work" variant="ghost">See more examples</Button>
         </div>
         <div className="mt-16 grid gap-x-10 gap-y-16 md:grid-cols-2">
           {projects.slice(0, limit).map((p, i) => (

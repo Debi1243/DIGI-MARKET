@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import { ProjectCard } from "@/components/sections/WorkShowcase";
-import Testimonials from "@/components/sections/Testimonials";
-import Clients from "@/components/sections/Clients";
+import FoundingOffer from "@/components/sections/FoundingOffer";
+import Industries from "@/components/sections/Industries";
 import Cta from "@/components/sections/Cta";
 import { projects } from "@/lib/data";
 
@@ -12,10 +12,10 @@ export default function WorkPage() {
   return (
     <>
       <PageHero
-        eyebrow="Portfolio"
-        title="Work that moves the needle"
-        highlight={["needle"]}
-        text="A selection of websites, apps, campaigns and software we have designed, built and grown with our clients."
+        eyebrow="What we build"
+        title="Ideas we can bring to life for you"
+        highlight={["life"]}
+        text="We are a new studio, so instead of a long client list here are examples of the websites, apps and software we design and build. Your project could be the first case study on this page."
       />
       <section className="pb-24">
         <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-16 px-6 md:grid-cols-2">
@@ -24,8 +24,8 @@ export default function WorkPage() {
           ))}
         </div>
       </section>
-      <Clients />
-      <Testimonials />
+      <Industries />
+      <FoundingOffer />
       <Cta />
     </>
   );

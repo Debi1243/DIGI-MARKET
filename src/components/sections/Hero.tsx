@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, type MotionValue, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { Rocket, Star, TrendingUp, Sparkles } from "lucide-react";
+import { Rocket, TrendingUp, Sparkles } from "lucide-react";
 import SplitText from "../ui/SplitText";
 import Button from "../ui/Button";
 
@@ -100,7 +100,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 py-1.5 pl-1.5 pr-4 text-sm text-paper/80"
         >
           <span className="rounded-full bg-lime px-2.5 py-0.5 text-xs font-semibold text-ink">New</span>
-          AI-powered SEO audits are here
+          Now taking on founding clients
           <Sparkles className="h-4 w-4 text-accent" />
         </motion.div>
 
@@ -152,11 +152,14 @@ export default function Hero() {
             ))}
           </div>
           <div className="text-sm">
-            <div className="flex items-center gap-1 text-accent">
-              {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
-              <span className="ml-1 font-semibold text-paper">4.9/5</span>
-            </div>
-            <p className="text-muted">Trusted by 600+ businesses</p>
+            <p className="flex items-center gap-1.5 font-semibold text-paper">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime" />
+              </span>
+              Founding-client slots open
+            </p>
+            <p className="text-muted">Launch pricing for our first clients</p>
           </div>
         </motion.div>
       </motion.div>
@@ -172,8 +175,8 @@ export default function Hero() {
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-xl bg-lime text-ink"><TrendingUp className="h-5 w-5" /></span>
             <div>
-              <p className="text-xs text-muted">Organic traffic</p>
-              <p className="font-display text-xl font-semibold">+312%</p>
+              <p className="text-xs text-muted">Growth focus</p>
+              <p className="font-display text-xl font-semibold">SEO + Ads</p>
             </div>
           </div>
           <svg viewBox="0 0 160 40" className="mt-3 h-10 w-40">
@@ -198,8 +201,8 @@ export default function Hero() {
         >
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-violet"><Rocket className="h-5 w-5" /></span>
           <div>
-            <p className="text-xs text-muted">Projects launched</p>
-            <p className="font-display text-xl font-semibold">950+</p>
+            <p className="text-xs text-muted">Under one roof</p>
+            <p className="font-display text-xl font-semibold">15 services</p>
           </div>
         </motion.div>
       </motion.div>
