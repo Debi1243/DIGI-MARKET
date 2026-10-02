@@ -68,7 +68,6 @@ export default function Process() {
               key={p.step}
               className="process-card glass relative flex shrink-0 flex-col overflow-hidden rounded-[2rem] p-8 lg:h-[26rem] lg:w-[34rem] lg:p-10"
             >
-              <span className="pc-anim absolute -right-4 -top-10 font-display text-[10rem] font-bold leading-none text-white/[0.04]">{p.step}</span>
               <span className="pc-anim grid h-14 w-14 place-items-center rounded-2xl bg-lime text-ink">
                 <Icon className="h-6 w-6" />
               </span>

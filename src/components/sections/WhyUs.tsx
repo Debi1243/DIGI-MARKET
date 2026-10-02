@@ -20,8 +20,7 @@ function Card({ i, progress, total }: { i: number; progress: MotionValue<number>
         style={{ scale }}
         className={`relative flex h-[26rem] w-full origin-top flex-col justify-between overflow-hidden rounded-[2.5rem] p-8 md:p-14 ${colors[i]}`}
       >
-        <div className="flex items-start justify-between">
-          <span className="font-mono text-sm opacity-70">0{i + 1} / 0{total}</span>
+        <div className="flex items-start justify-end">
           <Icon className="h-10 w-10 md:h-14 md:w-14" strokeWidth={1.5} />
         </div>
         <div>

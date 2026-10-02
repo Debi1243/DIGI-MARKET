@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import { projects } from "@/lib/data";
+import ProjectMockup from "./ProjectMockups";
 import SectionHeading from "../ui/SectionHeading";
 import Button from "../ui/Button";
 
@@ -26,40 +27,29 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
       className={clsx("group", i % 2 === 1 && "md:mt-32")}
       data-cursor="Explore"
     >
-      <div className={clsx("relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-gradient-to-br p-8", p.gradient)}>
+      <div className={clsx("relative flex aspect-square items-center justify-center overflow-hidden rounded-[2rem] bg-gradient-to-br p-5 pt-14 sm:aspect-[4/3] sm:p-8 sm:pt-14", p.gradient)}>
         <div className="absolute inset-0 bg-ink/10 transition-colors duration-700 group-hover:bg-transparent" />
-        <motion.div style={{ y, rotate }} className="relative mx-auto mt-6 w-[85%] transition-transform duration-700 group-hover:scale-105">
-          {/* Browser mockup */}
-          <div className="overflow-hidden rounded-xl bg-ink shadow-2xl shadow-black/40">
-            <div className="flex items-center gap-1.5 border-b border-[#fff]/10 px-3 py-2">
-              <span className="h-2 w-2 rounded-full bg-red-400" />
-              <span className="h-2 w-2 rounded-full bg-yellow-400" />
-              <span className="h-2 w-2 rounded-full bg-green-400" />
-              <span className="ml-3 h-3 flex-1 rounded bg-[#fff]/5" />
-            </div>
-            <div className="space-y-3 p-4">
-              <div className="h-3 w-1/3 rounded bg-[#fff]/20" />
-              <div className="h-6 w-3/4 rounded bg-[#fff]/80" />
-              <div className="h-6 w-1/2 rounded bg-[#fff]/50" />
-              <div className="grid grid-cols-3 gap-2 pt-2">
-                {[0, 1, 2].map((k) => (
-                  <div key={k} className={clsx("h-16 rounded-lg bg-gradient-to-br opacity-80", p.gradient)} />
-                ))}
-              </div>
-            </div>
-          </div>
+        <motion.div style={{ y, rotate }} className="relative w-full transition-transform duration-700 sm:w-[88%] group-hover:scale-105">
+          <ProjectMockup kind={p.kind} />
         </motion.div>
+        <span className="absolute left-6 top-6 rounded-full bg-ink/70 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[#fff] backdrop-blur">
+          Sample project
+        </span>
         <span className="absolute right-6 top-6 grid h-12 w-12 scale-0 place-items-center rounded-full bg-ink text-lime transition-transform duration-500 group-hover:scale-100">
           <ArrowUpRight className="h-5 w-5" />
         </span>
       </div>
-      <div className="mt-6 flex items-start justify-between gap-4">
+      <div className="mt-6 flex flex-col-reverse items-start justify-between gap-3 sm:flex-row sm:gap-4">
         <div>
-          <h3 className="font-display text-2xl font-semibold tracking-tight">{p.title}</h3>
+          <p className="text-sm font-semibold text-accent">
+            {p.client} <span className="font-normal text-muted">· {p.location}</span>
+          </p>
+          <h3 className="mt-1 font-display text-2xl font-semibold tracking-tight">{p.title}</h3>
           <p className="mt-1 text-sm text-muted">{p.category}</p>
         </div>
-        <span className="rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs font-medium text-accent">{p.result}</span>
+        <span className="shrink-0 rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs font-medium text-accent">{p.result}</span>
       </div>
+      <p className="mt-3 max-w-xl leading-relaxed text-muted">{p.summary}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {p.tags.map((t) => (
           <span key={t} className="rounded-full bg-white/5 px-3 py-1 text-xs text-muted">{t}</span>
