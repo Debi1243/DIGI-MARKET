@@ -1,7 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Clients from "@/components/sections/Clients";
 import Intro from "@/components/sections/Intro";
-import ServicesHoverList from "@/components/sections/ServicesHoverList";
 import Process from "@/components/sections/Process";
 import WhyUs from "@/components/sections/WhyUs";
 import WorkShowcase from "@/components/sections/WorkShowcase";
@@ -23,7 +22,6 @@ export default function Home() {
       <Hero />
       <Clients />
       <Intro />
-      <ServicesHoverList />
       <Process />
       <WhyUs />
       <WorkShowcase />
