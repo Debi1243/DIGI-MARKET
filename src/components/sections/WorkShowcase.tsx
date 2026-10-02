@@ -31,16 +31,16 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
         <motion.div style={{ y, rotate }} className="relative mx-auto mt-6 w-[85%] transition-transform duration-700 group-hover:scale-105">
           {/* Browser mockup */}
           <div className="overflow-hidden rounded-xl bg-ink shadow-2xl shadow-black/40">
-            <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+            <div className="flex items-center gap-1.5 border-b border-[#fff]/10 px-3 py-2">
               <span className="h-2 w-2 rounded-full bg-red-400" />
               <span className="h-2 w-2 rounded-full bg-yellow-400" />
               <span className="h-2 w-2 rounded-full bg-green-400" />
-              <span className="ml-3 h-3 flex-1 rounded bg-white/5" />
+              <span className="ml-3 h-3 flex-1 rounded bg-[#fff]/5" />
             </div>
             <div className="space-y-3 p-4">
-              <div className="h-3 w-1/3 rounded bg-white/20" />
-              <div className="h-6 w-3/4 rounded bg-white/80" />
-              <div className="h-6 w-1/2 rounded bg-white/50" />
+              <div className="h-3 w-1/3 rounded bg-[#fff]/20" />
+              <div className="h-6 w-3/4 rounded bg-[#fff]/80" />
+              <div className="h-6 w-1/2 rounded bg-[#fff]/50" />
               <div className="grid grid-cols-3 gap-2 pt-2">
                 {[0, 1, 2].map((k) => (
                   <div key={k} className={clsx("h-16 rounded-lg bg-gradient-to-br opacity-80", p.gradient)} />
@@ -58,7 +58,7 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
           <h3 className="font-display text-2xl font-semibold tracking-tight">{p.title}</h3>
           <p className="mt-1 text-sm text-muted">{p.category}</p>
         </div>
-        <span className="rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs font-medium text-lime">{p.result}</span>
+        <span className="rounded-full border border-lime/30 bg-lime/10 px-3 py-1 text-xs font-medium text-accent">{p.result}</span>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         {p.tags.map((t) => (

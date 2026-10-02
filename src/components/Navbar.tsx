@@ -8,6 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import clsx from "clsx";
 import Logo from "./ui/Logo";
 import Magnetic from "./ui/Magnetic";
+import ThemeToggle from "./ThemeToggle";
 import { services } from "@/lib/data";
 
 const links = [
@@ -72,6 +73,7 @@ export default function Navbar() {
             })}
           </ul>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <Magnetic className="hidden md:inline-block">
               <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-ink transition-transform hover:scale-105">
                 Start a project <ArrowUpRight className="h-4 w-4" />
@@ -122,7 +124,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-ink px-6 pb-10 pt-28 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-base px-6 pb-10 pt-28 md:hidden"
             initial={{ clipPath: "circle(0% at calc(100% - 44px) 44px)" }}
             animate={{ clipPath: "circle(150% at calc(100% - 44px) 44px)" }}
             exit={{ clipPath: "circle(0% at calc(100% - 44px) 44px)" }}

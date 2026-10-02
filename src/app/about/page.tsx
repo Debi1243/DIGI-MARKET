@@ -30,7 +30,7 @@ export default function AboutPage() {
           {pillars.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.1}>
               <div className="group h-full rounded-[1.75rem] border border-white/10 bg-ink-2 p-8 transition-colors duration-500 hover:border-lime/40">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-lime transition-all duration-500 group-hover:rotate-12 group-hover:bg-lime group-hover:text-ink">
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/5 text-accent transition-all duration-500 group-hover:rotate-12 group-hover:bg-lime group-hover:text-ink">
                   <p.icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-8 font-display text-3xl font-semibold">{p.title}</h3>

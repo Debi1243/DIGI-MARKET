@@ -46,7 +46,7 @@ export default function Intro() {
         </div>
         <div className="mt-24 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/5 bg-white/5 md:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.1} className="bg-ink p-8 md:p-10">
+            <Reveal key={s.label} delay={i * 0.1} className="bg-base p-8 md:p-10">
               <Counter value={s.value} suffix={s.suffix} className="font-display text-5xl font-semibold tracking-tight text-gradient md:text-6xl" />
               <p className="mt-3 text-sm text-muted">{s.label}</p>
             </Reveal>

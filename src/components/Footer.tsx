@@ -20,8 +20,8 @@ export default function Footer() {
             <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">{brand.tagline} A full-service digital studio for ambitious businesses.</p>
             <div className="mt-6 space-y-1 text-sm">
-              <a href={`mailto:${brand.email}`} className="block hover:text-lime">{brand.email}</a>
-              <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="block hover:text-lime">{brand.phone}</a>
+              <a href={`mailto:${brand.email}`} className="block hover:text-accent">{brand.email}</a>
+              <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="block hover:text-accent">{brand.phone}</a>
               <p className="text-muted">{brand.address}</p>
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function Footer() {
             <h3 className="text-xs uppercase tracking-[0.2em] text-muted">Company</h3>
             <ul className="mt-5 space-y-3 text-sm">
               {[["About", "/about"], ["Services", "/services"], ["Work", "/work"], ["Contact", "/contact"]].map(([l, h]) => (
-                <li key={h}><Link href={h} className="hover:text-lime">{l}</Link></li>
+                <li key={h}><Link href={h} className="hover:text-accent">{l}</Link></li>
               ))}
             </ul>
           </div>
@@ -37,7 +37,7 @@ export default function Footer() {
             <h3 className="text-xs uppercase tracking-[0.2em] text-muted">Services</h3>
             <ul className="mt-5 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
               {services.map((s) => (
-                <li key={s.slug}><Link href={`/services/${s.slug}`} className="text-paper/80 hover:text-lime">{s.title}</Link></li>
+                <li key={s.slug}><Link href={`/services/${s.slug}`} className="text-paper/80 hover:text-accent">{s.title}</Link></li>
               ))}
             </ul>
           </div>
@@ -49,9 +49,9 @@ export default function Footer() {
       <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-3 px-6 py-8 text-xs text-muted md:flex-row">
         <p>© {new Date().getFullYear()} {brand.full}. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-lime">Instagram</a>
-          <a href="#" className="hover:text-lime">LinkedIn</a>
-          <a href="#" className="hover:text-lime">Behance</a>
+          <a href="#" className="hover:text-accent">Instagram</a>
+          <a href="#" className="hover:text-accent">LinkedIn</a>
+          <a href="#" className="hover:text-accent">Behance</a>
         </div>
       </div>
     </footer>

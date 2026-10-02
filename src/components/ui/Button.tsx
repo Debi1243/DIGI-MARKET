@@ -18,7 +18,7 @@ export default function Button({ href, children, variant = "primary", className 
         className={clsx(
           "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-4 text-sm font-semibold transition-colors",
           variant === "primary" && "bg-lime text-ink",
-          variant === "dark" && "bg-ink text-paper",
+          variant === "dark" && "bg-ink text-[#f4f3ff]",
           variant === "ghost" && "border border-white/15 text-paper hover:border-white/40",
           className,
         )}
@@ -26,7 +26,7 @@ export default function Button({ href, children, variant = "primary", className 
         <span
           className={clsx(
             "absolute inset-0 translate-y-full rounded-full transition-transform duration-500 ease-[cubic-bezier(.76,0,.24,1)] group-hover:translate-y-0",
-            variant === "primary" ? "bg-white" : variant === "dark" ? "bg-violet" : "bg-white/10",
+            variant === "primary" ? "bg-[#fff]" : variant === "dark" ? "bg-violet" : "bg-white/10",
           )}
         />
         <span className="relative">{children}</span>

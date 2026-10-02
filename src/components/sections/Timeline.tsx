@@ -28,7 +28,7 @@ export default function Timeline() {
           <div className="space-y-16">
             {milestones.map((m, i) => (
               <div key={m.year} className={`relative grid items-center gap-6 pl-12 md:grid-cols-2 md:pl-0 ${i % 2 ? "" : "md:[&>div:nth-child(2)]:order-2"}`}>
-                <span className="absolute left-4 top-2 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-ink bg-lime md:left-1/2" />
+                <span className="absolute left-4 top-2 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-base bg-lime md:left-1/2" />
                 <Reveal className={i % 2 ? "md:pr-16 md:text-right" : "md:pl-16"}>
                   <p className="font-display text-6xl font-bold text-white/10">{m.year}</p>
                   <h3 className="mt-2 font-display text-2xl font-semibold">{m.title}</h3>

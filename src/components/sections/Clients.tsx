@@ -10,7 +10,7 @@ export default function Clients() {
         {clients.map((c) => (
           <span key={c} className="flex items-center gap-10 px-5 font-display text-2xl font-semibold text-paper/40 transition-colors hover:text-paper md:text-3xl">
             {c}
-            <Sparkle className="h-5 w-5 text-lime/60" />
+            <Sparkle className="h-5 w-5 text-accent/60" />
           </span>
         ))}
       </Marquee>

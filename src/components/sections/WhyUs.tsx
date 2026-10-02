@@ -7,7 +7,7 @@ import { whyUs } from "@/lib/data";
 import SectionHeading from "../ui/SectionHeading";
 
 const icons = [Zap, BadgeIndianRupee, Target, LifeBuoy];
-const colors = ["bg-lime text-ink", "bg-cyan text-ink", "bg-violet text-paper", "bg-paper text-ink"];
+const colors = ["bg-lime text-ink", "bg-cyan text-ink", "bg-violet text-[#f4f3ff]", "bg-paper text-base"];
 
 function Card({ i, progress, total }: { i: number; progress: MotionValue<number>; total: number }) {
   const start = i / total;

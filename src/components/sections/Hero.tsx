@@ -101,7 +101,7 @@ export default function Hero() {
         >
           <span className="rounded-full bg-lime px-2.5 py-0.5 text-xs font-semibold text-ink">New</span>
           AI-powered SEO audits are here
-          <Sparkles className="h-4 w-4 text-lime" />
+          <Sparkles className="h-4 w-4 text-accent" />
         </motion.div>
 
         <SplitText
@@ -148,11 +148,11 @@ export default function Hero() {
         >
           <div className="flex -space-x-3">
             {["from-lime to-cyan", "from-violet to-fuchsia-500", "from-amber-400 to-rose-500", "from-cyan to-blue-600"].map((g, i) => (
-              <span key={i} className={`h-10 w-10 rounded-full border-2 border-ink bg-gradient-to-br ${g}`} />
+              <span key={i} className={`h-10 w-10 rounded-full border-2 border-base bg-gradient-to-br ${g}`} />
             ))}
           </div>
           <div className="text-sm">
-            <div className="flex items-center gap-1 text-lime">
+            <div className="flex items-center gap-1 text-accent">
               {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}
               <span className="ml-1 font-semibold text-paper">4.9/5</span>
             </div>

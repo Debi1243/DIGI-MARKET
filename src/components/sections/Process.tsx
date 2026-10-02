@@ -77,7 +77,7 @@ export default function Process() {
               <ul className="mt-auto flex flex-wrap gap-2 pt-8">
                 {p.points.map((pt) => (
                   <li key={pt} className="pc-anim inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5 text-xs">
-                    <Check className="h-3.5 w-3.5 text-lime" /> {pt}
+                    <Check className="h-3.5 w-3.5 text-accent" /> {pt}
                   </li>
                 ))}
               </ul>
