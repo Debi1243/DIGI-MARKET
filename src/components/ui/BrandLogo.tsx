@@ -4,7 +4,7 @@ import logo from "@/assets/logo.png";
 import logoDark from "@/assets/logo-dark.png";
 import { brand } from "@/lib/data";
 
-/** The सृजEX wordmark, swapping to a brighter version in dark mode. */
+/** The सृजEX wordmark in the site gradient, with a brighter version for dark mode. */
 export default function BrandLogo({ className, priority }: { className?: string; priority?: boolean }) {
   return (
     <span className={clsx("relative inline-block", className)}>
