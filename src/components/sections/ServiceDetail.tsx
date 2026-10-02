@@ -93,8 +93,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
                 <TiltCard max={8}>
                   <div className="group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-ink-2 p-8">
                     <div className="spotlight pointer-events-none absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100" />
-                    <span className="relative font-mono text-sm text-accent">0{i + 1}</span>
-                    <h3 className="relative mt-10 font-display text-2xl font-semibold tracking-tight">{f.title}</h3>
+                    <h3 className="relative font-display text-2xl font-semibold tracking-tight">{f.title}</h3>
                     <p className="relative mt-3 leading-relaxed text-muted">{f.text}</p>
                   </div>
                 </TiltCard>
