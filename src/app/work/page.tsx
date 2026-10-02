@@ -13,9 +13,9 @@ export default function WorkPage() {
     <>
       <PageHero
         eyebrow="What we build"
-        title="Ideas we can bring to life for you"
-        highlight={["life"]}
-        text="We are a new studio, so instead of a long client list here are examples of the websites, apps and software we design and build. Your project could be the first case study on this page."
+        title="Sample work, built the way we build for clients"
+        highlight={["Sample"]}
+        text="We are a new studio, so these are sample projects for fictional businesses. Each one shows the screens, scope and stack we would deliver for a real brief like it. Your project could be the first real case study on this page."
       />
       <section className="pb-24">
         <div className="mx-auto grid max-w-7xl gap-x-10 gap-y-16 px-6 md:grid-cols-2">

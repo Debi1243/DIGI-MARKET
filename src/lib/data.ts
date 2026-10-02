@@ -420,48 +420,78 @@ export const tech = [
 // Example builds that show what we can make. These are concepts, not past client work.
 export const projects = [
   {
-    title: "Online Store",
+    client: "Kalinga Weaves",
+    title: "Handloom sarees, sold direct",
     category: "E-commerce website",
+    location: "Sambalpur, Odisha",
+    kind: "store",
+    summary:
+      "A storefront for a family of Sambalpuri ikat weavers: product stories for every saree, COD and UPI checkout, and WhatsApp order updates.",
     result: "Design · Build · SEO",
-    gradient: "from-lime-300 via-emerald-400 to-teal-600",
-    tags: ["Next.js", "Shopify", "SEO"],
+    gradient: "from-amber-300 via-orange-500 to-rose-700",
+    tags: ["Next.js", "Shopify", "Razorpay"],
   },
   {
-    title: "Clinic & Hospital System",
-    category: "Hospital software",
+    client: "CareWell Clinics",
+    title: "One screen for the whole OPD",
+    category: "Clinic management software",
+    location: "Bhubaneswar",
+    kind: "clinic",
+    summary:
+      "Token queue, e-prescriptions, lab orders and GST billing for a three-doctor clinic, with SMS reminders that cut no-shows.",
     result: "OPD · Billing · Pharmacy",
     gradient: "from-sky-300 via-blue-500 to-indigo-700",
     tags: ["Laravel", "React", "AWS"],
   },
   {
-    title: "Delivery App",
-    category: "Mobile app",
+    client: "DabbaGo",
+    title: "Home-cooked tiffins, tracked live",
+    category: "Food delivery app",
+    location: "Cuttack",
+    kind: "delivery",
+    summary:
+      "Customer, rider and kitchen apps for a tiffin service: weekly meal plans, live rider tracking and one-tap reorders.",
     result: "iOS & Android",
-    gradient: "from-fuchsia-400 via-violet-500 to-indigo-700",
-    tags: ["Flutter", "Firebase"],
+    gradient: "from-lime-300 via-emerald-500 to-teal-700",
+    tags: ["Flutter", "Firebase", "Google Maps"],
   },
   {
-    title: "Hotel Booking Suite",
-    category: "Hotel software + ads",
-    result: "Direct bookings",
-    gradient: "from-amber-300 via-orange-500 to-rose-600",
-    tags: ["PMS", "Google Ads"],
+    client: "Chilika Bay Resort",
+    title: "More direct bookings, fewer OTA fees",
+    category: "Hotel website + booking engine",
+    location: "Chilika Lake, Odisha",
+    kind: "hotel",
+    summary:
+      "A fast booking site with live room availability, seasonal pricing and Google Hotel Ads, so guests book direct instead of through OTAs.",
+    result: "Web · Booking · Google Ads",
+    gradient: "from-cyan-300 via-teal-500 to-blue-800",
+    tags: ["Next.js", "Channel manager", "Google Ads"],
   },
   {
-    title: "School ERP",
-    category: "Education software",
-    result: "Fees · Attendance · Parent app",
-    gradient: "from-yellow-300 via-amber-400 to-orange-600",
-    tags: ["React", "Node.js"],
+    client: "Sunrise Public School",
+    title: "Fees, attendance and a parent app",
+    category: "School ERP",
+    location: "Puri",
+    kind: "school",
+    summary:
+      "Online fee collection with auto receipts, daily attendance alerts to parents and report cards generated in one click.",
+    result: "ERP · Parent app",
+    gradient: "from-yellow-300 via-amber-500 to-orange-700",
+    tags: ["React", "Node.js", "PostgreSQL"],
   },
   {
-    title: "Gym Brand & App",
+    client: "IronPulse Fitness",
+    title: "A gym brand with its own app",
     category: "Branding + member app",
-    result: "Logo · App · Launch",
-    gradient: "from-rose-400 via-red-500 to-zinc-800",
-    tags: ["Branding", "React Native"],
+    location: "Rourkela",
+    kind: "gym",
+    summary:
+      "New identity, launch Instagram campaign and a member app for class bookings, workout plans and membership renewals.",
+    result: "Brand · App · Launch",
+    gradient: "from-rose-400 via-red-600 to-zinc-900",
+    tags: ["Branding", "React Native", "Meta Ads"],
   },
-];
+] as const;
 
 export const foundingPerks = [
   {
