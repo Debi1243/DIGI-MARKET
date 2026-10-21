@@ -29,6 +29,16 @@ The site is published at https://debi1243.github.io/Zoomin-Fotos/ from the `gh-p
 from the browser to the `CONTACT_ENDPOINT` repository variable (for example a Formspree URL);
 without one it asks visitors to email instead.
 
+## Self-hosted at zoominfotos.in
+
+The live site runs on the DevLab server as a Docker container (`Dockerfile`, `deploy/docker-compose.yml`),
+published through its own Cloudflare Tunnel. Every push to `main` goes live automatically: the server runs
+`deploy/auto-deploy.sh` from cron every minute, pulls new commits and rebuilds, which takes about 3 minutes.
+A failed build leaves the previous version running. Progress is logged to `~/zoominfotos-deploy.log` on the server.
+
+To redeploy without waiting, run `deploy/deploy.sh` (needs Tailscale and SSH access to the server).
+Secrets live only on the server in `deploy/.env`: `CLOUDFLARE_TUNNEL_TOKEN`, and optionally `CONTACT_WEBHOOK_URL`.
+
 ## Pages
 
 All pages are statically generated.

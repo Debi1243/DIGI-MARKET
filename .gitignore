@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# server-side deploy secrets and lock
+deploy/.cf-api
+deploy/.deploy.lock
+
 # vercel
 .vercel
 
