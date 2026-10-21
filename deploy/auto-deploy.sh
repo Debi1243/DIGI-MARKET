@@ -28,7 +28,13 @@ profile=()
 if grep -qs '^CLOUDFLARE_TUNNEL_TOKEN=.' .env; then profile=(--profile tunnel); fi
 if docker compose "${profile[@]}" up -d --build --quiet-pull >/dev/null 2>&1; then
   docker image prune -f >/dev/null
-  echo "[$(date '+%F %T')] live: $(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:30030/)"
+  # The new container needs a few seconds before it answers.
+  for _ in $(seq 30); do
+    code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:30030/ || true)"
+    [[ "$code" == 200 ]] && break
+    sleep 2
+  done
+  echo "[$(date '+%F %T')] live: HTTP $code"
 else
   echo "[$(date '+%F %T')] BUILD FAILED for ${latest:0:7}; previous version still running. Rerun: $0 --force"
   exit 1
