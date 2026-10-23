@@ -12,8 +12,8 @@ export default function Hero() {
   const [s1, s2, s3, s4, top, bottom] = pickPhotos(["01", "30", "14", "09", "02", "26"]);
   const slides = [s1, s2, s3, s4];
   return (
-    <section aria-labelledby="hero-title" className="aurora container-page grid items-center gap-y-10 pb-20 pt-6 md:pt-14 lg:grid-cols-12 lg:gap-x-10 lg:pb-28 lg:pt-16">
-      <div className="lg:col-span-6">
+    <section aria-labelledby="hero-title" className="aurora container-page grid items-center gap-y-8 gap-x-6 pb-20 pt-6 md:gap-y-10 md:pt-14 lg:grid-cols-12 lg:gap-x-10 lg:pb-28 lg:pt-16">
+      <div className="md:col-span-6 lg:col-span-6">
         <p className="rise label flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
           <span className="inline-flex items-center gap-2 text-fg">
             <span aria-hidden className="relative flex size-1.5">
@@ -48,12 +48,12 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Phones and tablets skip this block: the stories row and featured scroller carry the photos there. */}
-      <div className="hidden grid-cols-5 gap-4 lg:col-span-6 lg:grid">
-        <div className="col-span-3">
+      {/* Photo grid, responsive on all sizes */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 md:col-span-6 md:grid-cols-3 lg:col-span-6 lg:grid-cols-5 lg:gap-4">
+        <div className="col-span-2 md:col-span-2 lg:col-span-3">
           <HeroSlideshow photos={slides} />
         </div>
-        <Parallax distance={36} className="col-span-2 flex flex-col gap-3 pt-12 sm:gap-4 sm:pt-20">
+        <Parallax distance={36} className="col-span-2 flex flex-col gap-2 sm:gap-3 md:gap-4 md:pt-8 lg:pt-12">
           <PhotoFrame photo={top} sizes="(min-width: 1024px) 18vw, 40vw" priority className="wipe" style={{ "--i": 1 } as CSSProperties} />
           <PhotoFrame photo={bottom} sizes="(min-width: 1024px) 18vw, 40vw" className="wipe" style={{ "--i": 2 } as CSSProperties} />
         </Parallax>

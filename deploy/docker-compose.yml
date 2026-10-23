@@ -1,0 +1,49 @@
+# zoominfotos.in on the DevLab server (atp-ubuntu).
+# The site runs as a Next.js container, published by its own Cloudflare Tunnel on a separate
+# Cloudflare account. It stays off the shared devlab_devlab network and Traefik's Basic Auth,
+# because it's a public site.
+#
+# The tunnel is managed from the Cloudflare dashboard (public hostnames → http://zoominfotos-web:3000);
+# its token lives in deploy/.env on the server as CLOUDFLARE_TUNNEL_TOKEN, never in git.
+#
+# Deploys itself: deploy/auto-deploy.sh runs from cron on the server and rebuilds on every push to main.
+
+name: zoominfotos
+
+services:
+  web:
+    build:
+      context: ..
+      args:
+        NEXT_PUBLIC_SITE_URL: https://zoominfotos.in
+    image: zoominfotos-web:latest
+    container_name: zoominfotos-web
+    restart: unless-stopped
+    environment:
+      CONTACT_WEBHOOK_URL: "${CONTACT_WEBHOOK_URL:-}"
+    ports:
+      - "30030:3000" # LAN/Tailscale check: http://192.168.1.145:30030
+    networks:
+      - zoominfotos
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: zoominfotos-cloudflared
+    restart: unless-stopped
+    command: --no-autoupdate tunnel run
+    environment:
+      TUNNEL_TOKEN: "${CLOUDFLARE_TUNNEL_TOKEN:-}"
+    depends_on:
+      - web
+    networks:
+      - zoominfotos
+    # Only started once the token exists (deploy.sh adds --profile tunnel).
+    profiles:
+      - tunnel
+
+networks:
+  zoominfotos:
+    # Docker's default address pools are exhausted on this host, so pin a free range.
+    ipam:
+      config:
+        - subnet: 10.230.30.0/24

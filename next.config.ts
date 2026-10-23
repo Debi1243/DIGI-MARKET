@@ -2,13 +2,16 @@ import type { NextConfig } from "next";
 
 // STATIC_EXPORT=1 builds a static site for GitHub Pages (set BASE_PATH to the repo path, e.g. /Zoomin-Fotos).
 // Static hosting has no server, so the contact form posts from the browser instead of a Server Action.
+// STANDALONE=1 builds a self-contained Node server for the Docker image (see Dockerfile).
 const isStatic = process.env.STATIC_EXPORT === "1";
+const isStandalone = process.env.STANDALONE === "1";
 const basePath = process.env.BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   env: { NEXT_PUBLIC_BASE_PATH: isStatic ? basePath : "" },
   reactStrictMode: true,
+  ...(isStandalone && { output: "standalone" }),
   ...(isStatic && {
     output: "export",
     basePath,

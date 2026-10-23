@@ -3,13 +3,14 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import PhotoFrame from "@/components/photos/PhotoFrame";
-import { photosIn, services, serviceTone } from "@/lib/data";
+import { photosIn, services, serviceTone, formatRupees } from "@/lib/data";
 
 export default function ServiceIndex({ headingLevel: Heading = "h3" }: { headingLevel?: "h2" | "h3" }) {
   return (
     <ul className="border-t border-border">
       {services.map((s, i) => {
         const cover = photosIn(s.slug)[0];
+        const startingPrice = s.packages ? Math.min(...s.packages.map((p) => p.price)) : null;
         return (
           <li key={s.slug} className="reveal border-b border-border" style={{ "--i": Math.min(i, 3), "--tone": serviceTone[s.slug] } as CSSProperties}>
             <Link
@@ -20,9 +21,14 @@ export default function ServiceIndex({ headingLevel: Heading = "h3" }: { heading
               <span className="row-span-2 block md:row-span-1">
                 {cover && <PhotoFrame photo={{ ...cover, aspect: "square" }} caption={false} sizes="7rem" reveal />}
               </span>
-              <Heading className="font-display text-[1.75rem] leading-none tracking-[-0.01em] transition-[color,translate] duration-500 ease-[var(--ease-out-expo)] group-hover:text-[var(--tone)] md:text-[2.25rem] md:group-hover:translate-x-2">
-                {s.title}
-              </Heading>
+              <div className="flex flex-col gap-1">
+                <Heading className="font-display text-[1.75rem] leading-none tracking-[-0.01em] transition-[color,translate] duration-500 ease-[var(--ease-out-expo)] group-hover:text-[var(--tone)] md:text-[2.25rem] md:group-hover:translate-x-2">
+                  {s.title}
+                </Heading>
+                {startingPrice && (
+                  <span className="text-xs font-medium text-[var(--tone)]">Starting {formatRupees(startingPrice)}</span>
+                )}
+              </div>
               <span className="col-start-2 row-start-2 text-sm leading-relaxed text-muted md:col-start-4 md:row-start-1">{s.short}</span>
               <ArrowUpRight
                 aria-hidden
