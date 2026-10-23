@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "../ui/Logo";
-import { brand, locationLine, mailHref, services, telHref } from "@/lib/data";
+import { brand, locationLine, mailHref, services, telHref, whatsappHref } from "@/lib/data";
 import { primaryNav } from "@/lib/site";
 
 export default function SiteFooter() {
@@ -13,6 +13,7 @@ export default function SiteFooter() {
           <Logo size="lg" />
           <p className="mt-5 max-w-[36ch] text-sm leading-relaxed text-muted">{brand.description}</p>
           <address className="mt-8 space-y-1.5 text-sm not-italic">
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="link-underline block w-fit">WhatsApp</a>
             <a href={mailHref} className="link-underline block w-fit">{brand.email}</a>
             <a href={telHref} className="link-underline block w-fit">{brand.phone}</a>
             <span className="block text-muted">{locationLine}</span>

@@ -32,12 +32,12 @@ export default function HomePage() {
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "ProfessionalService",
+          "@type": "LocalBusiness",
           "@id": `${siteUrl}/#studio`,
           name: brand.name,
           description: brand.description,
+          image: absoluteUrl("/icon.png"),
           url: siteUrl,
-          logo: absoluteUrl("/icon.png"),
           email: brand.email,
           telephone: brand.phone.replace(/\s/g, ""),
           address: {
@@ -46,7 +46,12 @@ export default function HomePage() {
             addressRegion: brand.region,
             addressCountry: brand.country,
           },
-          areaServed: "IN",
+          areaServed: ["IN"],
+          openingHoursSpecification: [
+            { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "10:00", closes: "19:00", timezone: "Asia/Kolkata" },
+            { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "closed" },
+          ],
+          priceRange: "₹15000+",
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Photography services",

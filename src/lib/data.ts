@@ -446,4 +446,5 @@ export function photosIn(category: ServiceSlug) {
 
 export const telHref = `tel:${brand.phone.replace(/\s/g, "")}`;
 export const mailHref = `mailto:${brand.email}`;
+export const whatsappHref = `https://wa.me/${brand.phone.replace(/\D/g, "")}`;
 export const locationLine = `${brand.city}, ${brand.region}, India`;

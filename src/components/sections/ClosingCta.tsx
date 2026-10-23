@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/Button";
-import { brand, mailHref, telHref } from "@/lib/data";
+import { brand, mailHref, telHref, whatsappHref } from "@/lib/data";
 
 type Props = { title?: string; text?: string };
 
@@ -19,9 +19,10 @@ export default function ClosingCta({
           <p className="reveal mt-6 max-w-[52ch] text-lead text-inverse-muted" style={{ "--i": 1 } as CSSProperties}>{text}</p>
           <div className="reveal mt-10 flex flex-col gap-8 sm:flex-row sm:items-center" style={{ "--i": 2 } as CSSProperties}>
             <ButtonLink href="/contact" size="lg">Check your date</ButtonLink>
-            <div className="text-sm">
+            <div className="space-y-2 text-sm">
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="link-underline block w-fit">WhatsApp: {brand.phone}</a>
               <a href={mailHref} className="link-underline block w-fit">{brand.email}</a>
-              <a href={telHref} className="link-underline mt-1 block w-fit text-inverse-muted">{brand.phone}</a>
+              <a href={telHref} className="link-underline block w-fit text-inverse-muted">{brand.phone}</a>
             </div>
           </div>
         </div>
